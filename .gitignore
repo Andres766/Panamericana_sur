@@ -1,0 +1,15 @@
+# Dependencias
+/node_modules
+
+# Builds de Next.js
+/.next
+/out
+
+# Varios
+.DS_Store
+*.log
+.env*
+
+# Basura de Windows
+Thumbs.db
+desktop.ini

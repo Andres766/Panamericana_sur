@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Desplazamiento suave entre secciones.
+   (El espacio para el navbar fijo lo da la clase scroll-mt-20
+   de cada sección; no usar scroll-padding aquí porque ambos
+   valores se SUMAN y el salto quedaría doble.) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ------------------------------------------------------------
+   Animación de aparición al entrar en pantalla.
+   La clase .reveal se activa con Intersection Observer
+   (ver components/Reveal.jsx), sin librerías externas.
+   Variantes de dirección: se combinan con .reveal
+   (ej. <Reveal variante="izquierda">).
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.reveal-izquierda {
+  transform: translateX(-36px);
+}
+
+.reveal.reveal-derecha {
+  transform: translateX(36px);
+}
+
+.reveal.reveal-zoom {
+  transform: scale(0.9);
+}
+
+/* Estado final (va de último para ganarle a las variantes) */
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------------
+   Entrada del contenido del hero al cargar la página.
+   Los retrasos se coordinan con la pantalla de carga para que
+   el texto aparezca justo cuando esta se desvanece.
+   ------------------------------------------------------------ */
+@keyframes entrada-suave {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animacion-entrada {
+  animation: entrada-suave 0.8s ease-out both;
+}
+
+/* ------------------------------------------------------------
+   Efecto "Ken Burns": zoom lento y continuo de la diapositiva
+   activa del hero, para que el carrusel se sienta vivo.
+   ------------------------------------------------------------ */
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+.animacion-kenburns {
+  animation: ken-burns 7s ease-out forwards;
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------
+   Pantalla de carga: latido suave del logo y barrido de las
+   barras diagonales tricolor de la marca.
+
+   Escape de emergencia SIN JavaScript: si el bundle falla o la
+   hidratación tarda demasiado, esta animación desvanece el
+   overlay a los 6 s por sí sola (en el flujo normal, React lo
+   desmonta mucho antes y esta regla nunca llega a verse).
+   No se desactiva con prefers-reduced-motion a propósito:
+   es un mecanismo de rescate, no un adorno.
+   ------------------------------------------------------------ */
+@keyframes desvanecer-carga {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.pantalla-carga {
+  animation: desvanecer-carga 0.6s ease-out 6s forwards;
+}
+
+@keyframes latido-suave {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+}
+
+.animacion-latido {
+  animation: latido-suave 1.6s ease-in-out infinite;
+}
+
+@keyframes brillo-barra {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animacion-barra-carga {
+  animation: brillo-barra 1.1s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------
+   Aparición del lightbox de la galería (fade + zoom sutil)
+   ------------------------------------------------------------ */
+@keyframes aparecer-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animacion-aparecer {
+  animation: aparecer-zoom 0.25s ease-out both;
+}
+
+/* ------------------------------------------------------------
+   Pulso del botón flotante de WhatsApp
+   ------------------------------------------------------------ */
+@keyframes pulso-whatsapp {
+  0% {
+    box-shadow: 0 0 0 0 rgba(42, 128, 34, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(42, 128, 34, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(42, 128, 34, 0);
+  }
+}
+
+.animate-pulso {
+  animation: pulso-whatsapp 2s infinite;
+}
+
+/* ------------------------------------------------------------
+   Oculta la barra de scroll en los carruseles horizontales
+   (móvil) sin desactivar el desplazamiento.
+   ------------------------------------------------------------ */
+.sin-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.sin-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ------------------------------------------------------------
+   Respeta la preferencia del usuario de reducir movimiento.
+   IMPORTANTE: este bloque va DE ÚLTIMO en el archivo para
+   ganarle por orden de cascada a todas las animaciones de
+   arriba (dentro de un media query la especificidad no sube;
+   por eso las variantes de .reveal se listan con sus dos
+   clases y el bloque entero se declara al final).
+   La única excepción es .pantalla-carga (desvanecer-carga):
+   es un mecanismo de rescate, no un adorno.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.reveal-izquierda,
+  .reveal.reveal-derecha,
+  .reveal.reveal-zoom {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animacion-entrada,
+  .animacion-kenburns,
+  .animacion-latido,
+  .animacion-barra-carga,
+  .animacion-aparecer,
+  .animate-pulso {
+    animation: none;
+  }
+}
