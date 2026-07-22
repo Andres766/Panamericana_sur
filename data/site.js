@@ -31,11 +31,15 @@ export const site = {
   mapaEmbed:
     'https://maps.google.com/maps?q=Calle%2012%20%23%205-23%2C%20Pasto%2C%20Nari%C3%B1o%2C%20Colombia&t=&z=17&ie=UTF8&iwloc=&output=embed',
 
-  // Redes sociales (agregar las URLs cuando el cliente las entregue)
+  // Enlace directo a Google Maps (lo abre el botón flotante de ubicación).
+  mapaLink:
+    'https://www.google.com/maps/search/?api=1&query=Calle%2012%20%23%205-23%2C%20Pasto%2C%20Nari%C3%B1o%2C%20Colombia',
+
+  // Redes sociales del cliente
   redes: {
-    facebook: '#',
-    instagram: '#',
-    tiktok: '#',
+    facebook: 'https://www.facebook.com/share/1923tP7f7U/',
+    instagram: 'https://www.instagram.com/ferreteria.panamericana',
+    tiktok: 'https://www.tiktok.com/@ferreteria.panamericana',
   },
 };
 

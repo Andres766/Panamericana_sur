@@ -1,28 +1,77 @@
 // ============================================================
-// Fotos de la sección "Nuestros Trabajos".
+// Fotos de la sección "Obras realizadas con nuestros productos".
 //
-// Las fotos 1 a 6 son OBRAS REALES del cliente (vienen del
-// catálogo oficial, con el nombre de cada proyecto).
-// Las fotos 7 a 15 siguen siendo provisionales: cuando el
-// cliente envíe más fotos de obras, reemplaza los archivos en
-// public/images/galeria/ manteniendo los mismos nombres
-// (foto7.jpg ... foto15.jpg) y actualiza su texto "alt" aquí.
+// Son OBRAS REALES del cliente (salen del catálogo oficial, que
+// indica el lugar y el producto usado en cada una). Cada foto
+// tiene los datos que se muestran al ampliarla en el lightbox:
+// - lugar:       dónde se hizo la obra.
+// - producto:    qué producto de la ferretería se usó.
+// - medida:      largo × ancho del producto (vacío si no aplica).
+// - descripcion: texto corto (2–3 líneas) sobre la obra.
+//
+// Para agregar más obras: copia la foto a public/images/galeria/
+// (foto7.jpg, foto8.jpg...) y añade aquí un objeto con sus datos.
 // ============================================================
 
 export const gallery = [
-  { id: 1, imagen: '/images/galeria/foto1.jpg', alt: 'Cubierta en teja UPVC — Colegio San Felipe Neri' },
-  { id: 2, imagen: '/images/galeria/foto2.jpg', alt: 'Cubierta con estructura en arco — Parque Bolívar' },
-  { id: 3, imagen: '/images/galeria/foto3.jpg', alt: 'Cubierta blanca cresta alta — Plazoleta de comidas, sector Morasurco' },
-  { id: 4, imagen: '/images/galeria/foto4.jpg', alt: 'Cubierta en teja UPVC colonial — Colegio San Juan de Pasto' },
-  { id: 5, imagen: '/images/galeria/foto5.jpg', alt: 'Cubierta en policarbonato cristal — Colegio San Juan de Pasto' },
-  { id: 6, imagen: '/images/galeria/foto6.jpg', alt: 'Importación directa: descarga de teja en contenedor' },
-  { id: 7, imagen: '/images/galeria/foto7.jpg', alt: 'Trabajo realizado 7: cubierta termoacústica' },
-  { id: 8, imagen: '/images/galeria/foto8.jpg', alt: 'Trabajo realizado 8: instalación de canales' },
-  { id: 9, imagen: '/images/galeria/foto9.jpg', alt: 'Trabajo realizado 9: remodelación de techo' },
-  { id: 10, imagen: '/images/galeria/foto10.jpg', alt: 'Trabajo realizado 10: teja UPVC blanca' },
-  { id: 11, imagen: '/images/galeria/foto11.jpg', alt: 'Trabajo realizado 11: proyecto residencial' },
-  { id: 12, imagen: '/images/galeria/foto12.jpg', alt: 'Trabajo realizado 12: cubierta industrial' },
-  { id: 13, imagen: '/images/galeria/foto13.jpg', alt: 'Trabajo realizado 13: impermeabilización' },
-  { id: 14, imagen: '/images/galeria/foto14.jpg', alt: 'Trabajo realizado 14: techo terminado' },
-  { id: 15, imagen: '/images/galeria/foto15.jpg', alt: 'Trabajo realizado 15: obra finalizada' },
+  {
+    id: 1,
+    imagen: '/images/galeria/foto1.jpg',
+    alt: 'Cubierta en teja UPVC blanca cresta baja — Colegio San Felipe Neri',
+    lugar: 'Colegio San Felipe Neri, Pasto',
+    producto: 'Teja UPVC Blanca Cresta Baja',
+    medida: 'Largo 11.80 m × Ancho 1.13 m',
+    descripcion:
+      'Cubierta metálica en arco para las zonas comunes del colegio, instalada con teja UPVC blanca de cresta baja para lograr aislamiento térmico y una larga vida útil sin corrosión.',
+  },
+  {
+    id: 2,
+    imagen: '/images/galeria/foto2.jpg',
+    alt: 'Cubierta en teja UPVC blanca cresta alta — Parque Bolívar',
+    lugar: 'Parque Bolívar, Pasto',
+    producto: 'Teja UPVC Blanca Cresta Alta',
+    medida: 'Largo 11.80 m × Ancho 1.07 m',
+    descripcion:
+      'Estructura en arco para espacio público cubierta con teja UPVC de cresta alta, que soporta grandes luces y resiste la humedad y el clima frío de la región.',
+  },
+  {
+    id: 3,
+    imagen: '/images/galeria/foto3.jpg',
+    alt: 'Cubierta en teja UPVC blanca cresta alta — Plazoleta de comidas, sector Morasurco',
+    lugar: 'Plazoleta de comidas, sector Morasurco',
+    producto: 'Teja UPVC Blanca Cresta Alta',
+    medida: 'Largo 11.80 m × Ancho 1.07 m',
+    descripcion:
+      'Cubierta para zona comercial de comidas con teja UPVC blanca de cresta alta, que reduce el ruido de la lluvia y el calor interior para mayor comodidad de los visitantes.',
+  },
+  {
+    id: 4,
+    imagen: '/images/galeria/foto4.jpg',
+    alt: 'Techo en teja UPVC colonial — Colegio San Juan de Pasto',
+    lugar: 'Colegio San Juan de Pasto',
+    producto: 'Teja UPVC Colonial',
+    medida: 'Largo 10.66 m × Ancho 1.05 m',
+    descripcion:
+      'Techo con acabado colonial que combina la estética tradicional con la tecnología UPVC: menor peso sobre la estructura, alta resistencia a la humedad y muy poco mantenimiento.',
+  },
+  {
+    id: 5,
+    imagen: '/images/galeria/foto5.jpg',
+    alt: 'Cubierta en teja policarbonato cristal — Colegio San Juan de Pasto',
+    lugar: 'Colegio San Juan de Pasto',
+    producto: 'Teja Policarbonato Cristal Cresta Alta',
+    medida: 'Largo 6.00 m × Ancho 1.07 m',
+    descripcion:
+      'Pérgola con teja de policarbonato cristal sobre estructura metálica, que deja pasar la luz natural y reduce el consumo de energía durante el día.',
+  },
+  {
+    id: 6,
+    imagen: '/images/galeria/foto6.jpg',
+    alt: 'Importación directa: descarga de teja en contenedor',
+    lugar: 'Pasto, Nariño',
+    producto: 'Importación directa',
+    medida: '',
+    descripcion:
+      'Descarga de contenedor con teja importada directamente de fábrica. Al importar sin intermediarios garantizamos disponibilidad, calidad y mejores precios para tu obra.',
+  },
 ];

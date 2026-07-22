@@ -28,6 +28,29 @@ export default function Productos() {
           </p>
         </Reveal>
 
+        {/* Aviso: ficha técnica por WhatsApp */}
+        <Reveal delay={120}>
+          <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center gap-4 rounded-2xl border border-verde/30 bg-verde/5 p-5 text-center sm:flex-row sm:justify-center sm:text-left">
+            <svg className="h-8 w-8 flex-none text-verdeoscuro" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <p className="text-sm text-navy sm:text-base">
+              ¿Necesitas la <strong>ficha técnica</strong> de algún producto?{' '}
+              <a
+                href={linkWhatsApp(
+                  'Hola, me gustaría recibir la ficha técnica de un producto. 📄'
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-verdeoscuro underline decoration-verde/50 underline-offset-2 transition-colors hover:text-navy"
+              >
+                Solicítala por WhatsApp
+              </a>{' '}
+              y te la enviamos.
+            </p>
+          </div>
+        </Reveal>
+
         {/*
           Lista de productos:
           - Móvil: flex horizontal con snap-x (deslizable con el dedo).

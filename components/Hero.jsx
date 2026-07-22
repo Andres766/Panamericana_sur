@@ -1,100 +1,47 @@
-'use client';
-
-import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AcentoDiagonal from '@/components/AcentoDiagonal';
-import { slides } from '@/data/slides';
 import { linkWhatsApp } from '@/data/site';
 
-// Tiempo entre diapositivas del carrusel automático (en milisegundos)
-const INTERVALO_MS = 4000;
-
 /**
- * Hero principal con carrusel de imágenes de fondo:
- * - Avanza solo cada 4 segundos con transición de opacidad suave.
- * - Flechas manuales, puntos indicadores y botón de pausa/reanudar.
- * - Respeta la preferencia del sistema "reducir movimiento".
- * - Overlay oscuro para que el texto siempre sea legible.
- * - Solo la primera imagen carga de inmediato; las demás se montan
- *   después de la hidratación para no frenar la carga inicial.
- * Implementado únicamente con React state y transiciones CSS.
+ * Hero principal: fondo de marca (sin carrusel de fotos).
+ * - Degradado navy con el símbolo de la marca como marca de agua gigante.
+ * - Barras diagonales tricolor decorativas.
+ * - Eslogan, subtítulo y botones de acción.
+ * El texto entra con una animación suave (CSS) coordinada con la
+ * pantalla de carga. Es un componente de servidor: no usa estado.
  */
 export default function Hero() {
-  const [actual, setActual] = useState(0); // índice de la diapositiva visible
-  const [pausado, setPausado] = useState(false); // pausa del auto-avance
-  const [listo, setListo] = useState(false); // true después de la hidratación
-
-  // La diapositiva SALIENTE conserva la clase del zoom (Ken Burns)
-  // mientras se desvanece; si la perdiera de inmediato, su escala
-  // saltaría de ~1.1 a 1 en pleno crossfade (encogimiento visible).
-  const [previo, setPrevio] = useState(null);
-  const refAnterior = useRef(0);
-  useEffect(() => {
-    if (refAnterior.current !== actual) {
-      setPrevio(refAnterior.current);
-      refAnterior.current = actual;
-    }
-  }, [actual]);
-
-  // Tras la carga inicial se montan las diapositivas 2 a 5, así la
-  // primera imagen (la más importante) no compite con las otras cuatro.
-  useEffect(() => {
-    setListo(true);
-    // Si el usuario prefiere menos movimiento, el carrusel arranca pausado
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setPausado(true);
-    }
-  }, []);
-
-  // Avanza a la siguiente diapositiva (vuelve a la primera al terminar)
-  const siguiente = useCallback(
-    () => setActual((i) => (i + 1) % slides.length),
-    []
-  );
-
-  // Retrocede a la diapositiva anterior
-  const anterior = () =>
-    setActual((i) => (i - 1 + slides.length) % slides.length);
-
-  // Temporizador automático. Se reinicia cada vez que cambia la
-  // diapositiva (así la navegación manual no choca con la automática)
-  // y se detiene mientras el carrusel esté pausado.
-  useEffect(() => {
-    if (pausado) return;
-    const temporizador = setInterval(siguiente, INTERVALO_MS);
-    return () => clearInterval(temporizador);
-  }, [actual, pausado, siguiente]);
-
   return (
     <section
       id="inicio"
-      className="relative flex h-svh min-h-[560px] items-center justify-center overflow-hidden"
+      className="relative flex h-svh min-h-[560px] items-center justify-center overflow-hidden bg-navy"
     >
-      {/* Imágenes apiladas: solo la actual está visible (fade con CSS) */}
-      {slides.map((slide, i) =>
-        i === 0 || listo ? (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              i === actual ? 'opacity-100' : 'opacity-0'
-            }`}
-            aria-hidden={i !== actual}
-          >
-            <Image
-              src={slide.imagen}
-              alt={slide.alt}
-              fill
-              sizes="100vw"
-              priority={i === 0}
-              // La diapositiva activa hace un zoom lento (Ken Burns).
-              // La saliente ("previo") lo mantiene durante el crossfade.
-              className={`object-cover ${i === actual || i === previo ? 'animacion-kenburns' : ''}`}
-            />
-            {/* Overlay oscuro para legibilidad del texto */}
-            <div className="absolute inset-0 bg-navy/60" />
-          </div>
-        ) : null
-      )}
+      {/* Fondo: degradado navy */}
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-[#252c56] via-navy to-[#12162e]"
+        aria-hidden="true"
+      />
+
+      {/* Símbolo de la marca como marca de agua gigante */}
+      <Image
+        src="/images/logos/simbolo-blanco.png"
+        alt=""
+        width={127}
+        height={163}
+        priority
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 top-1/2 w-64 -translate-y-1/2 opacity-[0.07] sm:w-96 lg:right-10 lg:w-[30rem]"
+      />
+
+      {/* Barras diagonales tricolor decorativas en la esquina inferior izquierda */}
+      <div
+        className="pointer-events-none absolute -left-6 bottom-10 flex gap-2 opacity-90"
+        aria-hidden="true"
+      >
+        <span className="h-3 w-24 -skew-x-[24deg] rounded-[3px] bg-naranja" />
+        <span className="h-3 w-24 -skew-x-[24deg] rounded-[3px] bg-white/80" />
+        <span className="h-3 w-24 -skew-x-[24deg] rounded-[3px] bg-verde" />
+      </div>
 
       {/* Contenido central. Entra escalonado justo cuando la pantalla
           de carga se desvanece (los retrasos están coordinados). */}
@@ -102,11 +49,13 @@ export default function Hero() {
         {/* Trazos diagonales de la marca */}
         <AcentoDiagonal enOscuro className="animacion-entrada mb-6 [animation-delay:950ms]" />
         <h1 className="animacion-entrada text-4xl font-extrabold leading-tight drop-shadow-md [animation-delay:1075ms] sm:text-5xl lg:text-6xl">
-          Tu techo, <span className="text-naranja">nuestra solución</span>
+          Importamos soluciones,{' '}
+          <span className="text-naranja">construimos confianza</span>
         </h1>
         <p className="animacion-entrada mx-auto mt-5 max-w-2xl text-base font-medium text-white/90 [animation-delay:1200ms] sm:text-lg lg:text-xl">
-          Importadores directos de Teja UPVC para viviendas, bodegas, fincas y
-          locales comerciales
+          Importadores directos de Tejas UPVC Termoacústica, que brindan
+          soluciones resistentes al calor, la humedad y la corrosión para
+          viviendas, bodegas, fincas y locales comerciales.
         </p>
 
         {/* Botones de acción */}
@@ -130,66 +79,6 @@ export default function Hero() {
             Ver productos
           </a>
         </div>
-      </div>
-
-      {/* Flecha izquierda */}
-      <button
-        type="button"
-        onClick={anterior}
-        aria-label="Diapositiva anterior"
-        className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/15 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-naranjaoscuro sm:left-6"
-      >
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      {/* Flecha derecha */}
-      <button
-        type="button"
-        onClick={siguiente}
-        aria-label="Siguiente diapositiva"
-        className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/15 p-2.5 text-white backdrop-blur-sm transition-colors hover:bg-naranjaoscuro sm:right-6"
-      >
-        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Controles inferiores: pausa + puntos indicadores */}
-      <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2.5">
-        {/* Botón pausar/reanudar (accesibilidad: WCAG 2.2.2) */}
-        <button
-          type="button"
-          onClick={() => setPausado(!pausado)}
-          aria-label={pausado ? 'Reanudar el carrusel' : 'Pausar el carrusel'}
-          className="mr-1.5 rounded-full bg-white/15 p-1.5 text-white backdrop-blur-sm transition-colors hover:bg-naranjaoscuro"
-        >
-          {pausado ? (
-            // Ícono reproducir
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          ) : (
-            // Ícono pausa
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-            </svg>
-          )}
-        </button>
-
-        {slides.map((slide, i) => (
-          <button
-            key={slide.id}
-            type="button"
-            onClick={() => setActual(i)}
-            aria-label={`Ir a la diapositiva ${i + 1}`}
-            aria-current={i === actual}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
-              i === actual ? 'w-8 bg-naranja' : 'w-2.5 bg-white/60 hover:bg-white'
-            }`}
-          />
-        ))}
       </div>
     </section>
   );

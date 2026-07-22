@@ -46,10 +46,11 @@ mismo nombre** (no hay que tocar el código) y vuelve a ejecutar `npm run build`
 | Carpeta | Archivos | Estado |
 | --- | --- | --- |
 | `public/images/productos/` | 14 renders con nombre descriptivo (`teja-upvc-colonial.jpg`, `cemento-cemex.jpg`, …) | ✔ Reales, del catálogo (páginas 2–15) |
-| `public/images/hero/` | `slide1.jpg` … `slide5.jpg` | ✔ Reales: fotos de obras del catálogo |
-| `public/images/galeria/` | `foto1.jpg` … `foto6.jpg` | ✔ Reales: obras con nombre de proyecto |
-| `public/images/galeria/` | `foto7.jpg` … `foto15.jpg` | ⏳ Provisionales: se reemplazan cuando el cliente envíe más fotos de obras |
+| `public/images/galeria/` | `foto1.jpg` … `foto6.jpg` | ✔ Reales: 6 obras con lugar, producto y medida (ver `data/gallery.js`). Para agregar más, copia `foto7.jpg`… y añade su objeto en `data/gallery.js` |
+| `public/images/empresa/` | `empresa1.jpg` … `empresa8.jpg` | ⏳ Provisionales: hoy son placeholders de picsum.photos (ver `data/empresa.js`) |
 | `public/images/logos/` | `logo-*.png` | ✔ Reales |
+
+> El hero ya no usa carrusel de fotos: ahora es un fondo de marca (navy con el símbolo de la marca). Por eso se eliminó la carpeta `public/images/hero/`.
 
 Fotos reales de la galería: `foto1` Colegio San Felipe Neri · `foto2` Parque
 Bolívar · `foto3` Plazoleta de comidas (Morasurco) · `foto4` y `foto5` Colegio
@@ -66,7 +67,7 @@ El archivo original de cada producto está en
 | `data/site.js` | Teléfonos, WhatsApp, ciudad, horario, URL del mapa, redes sociales |
 | `data/products.js` | Nombres, medidas y descripciones de los 14 productos del catálogo |
 | `data/gallery.js` | Textos alternativos de la galería |
-| `data/slides.js` | Textos alternativos del carrusel |
+| `data/empresa.js` | Fotos de la sección "Nuestra Empresa" (placeholders por ahora) |
 | `tailwind.config.js` | Colores de marca (navy, naranja, verde, gris) |
 
 ### Actualizar el mapa de Google

@@ -5,8 +5,22 @@ import AcentoDiagonal from '@/components/AcentoDiagonal';
 import Reveal from '@/components/Reveal';
 import { linkWhatsApp } from '@/data/site';
 
-// Opciones del selector "Tipo de proyecto"
-const tiposDeProyecto = ['Vivienda', 'Bodega', 'Finca', 'Local comercial'];
+// Opciones del selector "Tipo de cliente"
+const tiposDeCliente = [
+  'Vivienda',
+  'Colegio',
+  'Estadio',
+  'Bodega',
+  'Finca',
+  'Local comercial',
+  'Galpón',
+  'Coliseo',
+  'Escenario deportivo',
+  'Proyecto industrial',
+  'Terraza',
+  'Remodelación',
+  'Otro',
+];
 
 /**
  * Formulario de cotización SIN backend:
@@ -17,11 +31,16 @@ export default function FormularioCotizacion() {
   const [datos, setDatos] = useState({
     nombre: '',
     telefono: '',
-    tipoProyecto: tiposDeProyecto[0],
+    tipoCliente: tiposDeCliente[0],
+    ciudad: '',
+    departamento: '',
+    productoInteres: '',
+    transporte: 'No',
+    corte: 'No',
     mensaje: '',
   });
 
-  // Actualiza el campo correspondiente cuando el usuario escribe
+  // Actualiza el campo correspondiente cuando el usuario escribe/elige
   const alCambiar = (evento) => {
     const { name, value } = evento.target;
     setDatos((previos) => ({ ...previos, [name]: value }));
@@ -36,7 +55,12 @@ export default function FormularioCotizacion() {
       '',
       `*Nombre:* ${datos.nombre}`,
       `*Teléfono:* ${datos.telefono}`,
-      `*Tipo de proyecto:* ${datos.tipoProyecto}`,
+      `*Tipo de cliente:* ${datos.tipoCliente}`,
+      datos.ciudad ? `*Ciudad/Municipio:* ${datos.ciudad}` : '',
+      datos.departamento ? `*Departamento:* ${datos.departamento}` : '',
+      datos.productoInteres ? `*Producto de interés:* ${datos.productoInteres}` : '',
+      `*¿Necesita transporte?:* ${datos.transporte}`,
+      `*¿Necesita corte?:* ${datos.corte}`,
       datos.mensaje ? `*Mensaje:* ${datos.mensaje}` : '',
     ]
       .filter((linea, indice) => linea !== '' || indice === 1) // conserva la línea en blanco tras el saludo
@@ -45,7 +69,7 @@ export default function FormularioCotizacion() {
     window.open(linkWhatsApp(texto), '_blank', 'noopener,noreferrer');
   };
 
-  // Estilo compartido de todos los campos
+  // Estilo compartido de los campos de texto y selects
   const estiloCampo =
     'w-full rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-navy placeholder-gray-400 outline-none transition-colors focus:border-naranja focus:ring-2 focus:ring-naranja/30';
 
@@ -105,25 +129,133 @@ export default function FormularioCotizacion() {
                 />
               </div>
 
-              {/* Tipo de proyecto */}
+              {/* Tipo de cliente */}
               <div>
-                <label htmlFor="tipoProyecto" className="mb-1.5 block text-sm font-bold text-navy">
-                  Tipo de proyecto *
+                <label htmlFor="tipoCliente" className="mb-1.5 block text-sm font-bold text-navy">
+                  Tipo de cliente *
                 </label>
                 <select
-                  id="tipoProyecto"
-                  name="tipoProyecto"
-                  value={datos.tipoProyecto}
+                  id="tipoCliente"
+                  name="tipoCliente"
+                  value={datos.tipoCliente}
                   onChange={alCambiar}
                   className={estiloCampo}
                 >
-                  {tiposDeProyecto.map((tipo) => (
+                  {tiposDeCliente.map((tipo) => (
                     <option key={tipo} value={tipo}>
                       {tipo}
                     </option>
                   ))}
                 </select>
               </div>
+
+              {/* Ciudad o municipio */}
+              <div>
+                <label htmlFor="ciudad" className="mb-1.5 block text-sm font-bold text-navy">
+                  Ciudad o municipio
+                </label>
+                <input
+                  id="ciudad"
+                  name="ciudad"
+                  type="text"
+                  autoComplete="address-level2"
+                  placeholder="Ej: Pasto"
+                  value={datos.ciudad}
+                  onChange={alCambiar}
+                  className={estiloCampo}
+                />
+              </div>
+
+              {/* Departamento */}
+              <div>
+                <label htmlFor="departamento" className="mb-1.5 block text-sm font-bold text-navy">
+                  Departamento
+                </label>
+                <input
+                  id="departamento"
+                  name="departamento"
+                  type="text"
+                  autoComplete="address-level1"
+                  placeholder="Ej: Nariño"
+                  value={datos.departamento}
+                  onChange={alCambiar}
+                  className={estiloCampo}
+                />
+              </div>
+
+              {/* Producto de interés */}
+              <div className="sm:col-span-2">
+                <label htmlFor="productoInteres" className="mb-1.5 block text-sm font-bold text-navy">
+                  Producto de interés
+                </label>
+                <input
+                  id="productoInteres"
+                  name="productoInteres"
+                  type="text"
+                  placeholder="Ej: Teja UPVC Termoacústica cresta baja"
+                  value={datos.productoInteres}
+                  onChange={alCambiar}
+                  className={estiloCampo}
+                />
+              </div>
+
+              {/* ¿Necesita transporte? */}
+              <fieldset>
+                <legend className="mb-1.5 block text-sm font-bold text-navy">
+                  ¿Necesita transporte?
+                </legend>
+                <div className="flex gap-3">
+                  {['Sí', 'No'].map((opcion) => (
+                    <label
+                      key={opcion}
+                      className={`flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-colors ${
+                        datos.transporte === opcion
+                          ? 'border-naranja bg-naranja/10 text-navy'
+                          : 'border-gray-200 text-gristexto hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="transporte"
+                        value={opcion}
+                        checked={datos.transporte === opcion}
+                        onChange={alCambiar}
+                        className="accent-naranja"
+                      />
+                      {opcion}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              {/* ¿Necesita corte? */}
+              <fieldset>
+                <legend className="mb-1.5 block text-sm font-bold text-navy">
+                  ¿Necesita corte?
+                </legend>
+                <div className="flex gap-3">
+                  {['Sí', 'No'].map((opcion) => (
+                    <label
+                      key={opcion}
+                      className={`flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-colors ${
+                        datos.corte === opcion
+                          ? 'border-naranja bg-naranja/10 text-navy'
+                          : 'border-gray-200 text-gristexto hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="corte"
+                        value={opcion}
+                        checked={datos.corte === opcion}
+                        onChange={alCambiar}
+                        className="accent-naranja"
+                      />
+                      {opcion}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
 
               {/* Mensaje */}
               <div className="sm:col-span-2">
@@ -134,7 +266,7 @@ export default function FormularioCotizacion() {
                   id="mensaje"
                   name="mensaje"
                   rows={4}
-                  placeholder="Cuéntanos qué necesitas: medidas aproximadas, tipo de teja, ubicación de la obra..."
+                  placeholder="Cuéntanos qué necesitas: medidas aproximadas, cantidad, ubicación de la obra..."
                   value={datos.mensaje}
                   onChange={alCambiar}
                   className={`${estiloCampo} resize-none`}

@@ -2,6 +2,7 @@ import PantallaCarga from '@/components/PantallaCarga';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import QuienesSomos from '@/components/QuienesSomos';
+import NuestraEmpresa from '@/components/NuestraEmpresa';
 import Productos from '@/components/Productos';
 import PorQueElegirnos from '@/components/PorQueElegirnos';
 import Galeria from '@/components/Galeria';
@@ -24,6 +25,7 @@ export default function Home() {
       <main>
         <Hero />
         <QuienesSomos />
+        <NuestraEmpresa />
         <Productos />
         <PorQueElegirnos />
         <Galeria />

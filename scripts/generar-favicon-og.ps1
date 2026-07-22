@@ -86,7 +86,7 @@ $logo.Dispose()
 # 3. Imagen Open Graph 1200x630: foto real de obra oscurecida
 #    + logo combinado + barras diagonales tricolor
 # ------------------------------------------------------------
-$foto = [System.Drawing.Bitmap]::FromFile("$raiz\public\images\hero\slide1.jpg")
+$foto = [System.Drawing.Bitmap]::FromFile("$raiz\public\images\galeria\foto1.jpg")
 $og = New-Object System.Drawing.Bitmap(1200, 630, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
 $g = [System.Drawing.Graphics]::FromImage($og)
 $g.InterpolationMode = 'HighQualityBicubic'

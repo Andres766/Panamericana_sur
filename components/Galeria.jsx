@@ -7,8 +7,8 @@ import Reveal from '@/components/Reveal';
 import { gallery } from '@/data/gallery';
 
 /**
- * Sección "Nuestros Trabajos": cuadrícula responsiva de fotos
- * (2 columnas en móvil, 4 en escritorio) con efecto lightbox.
+ * Sección "Obras realizadas con nuestros productos": cuadrícula
+ * responsiva de fotos (2 columnas en móvil, 4 en escritorio) con lightbox.
  *
  * El lightbox está hecho solo con React state y CSS:
  * - Click en una foto -> se abre en grande con fondo oscuro.
@@ -27,6 +27,7 @@ export default function Galeria() {
   const refFocoPrevio = useRef(null); // elemento enfocado antes de abrir
 
   const estaAbierto = abierta !== null;
+  const fotoActiva = estaAbierto ? gallery[abierta] : null; // datos de la foto ampliada
 
   // Manejo del foco: al abrir se guarda el foco actual y se mueve al
   // botón de cerrar; al cerrar se devuelve a donde estaba (la miniatura).
@@ -81,12 +82,13 @@ export default function Galeria() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center">
           <h2 className="text-3xl font-extrabold text-navy sm:text-4xl">
-            Nuestros <span className="text-naranja">Trabajos</span>
+            Obras realizadas con{' '}
+            <span className="text-naranja">nuestros productos</span>
           </h2>
           <AcentoDiagonal className="mt-4" />
           <p className="mx-auto mt-4 max-w-2xl text-gristexto sm:text-lg">
-            Proyectos reales instalados por nuestro equipo. Toca cualquier foto
-            para verla en grande.
+            Proyectos reales hechos con nuestros productos. Toca cualquier foto
+            para ver los detalles.
           </p>
         </Reveal>
 
@@ -133,7 +135,7 @@ export default function Galeria() {
           className="animacion-aparecer fixed inset-0 z-[70] flex items-center justify-center bg-black/90 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label={gallery[abierta].alt}
+          aria-label={fotoActiva.alt}
           onClick={() => setAbierta(null)} // Tocar el fondo cierra
         >
           {/* Botón cerrar (recibe el foco al abrir el lightbox) */}
@@ -164,17 +166,63 @@ export default function Galeria() {
             </svg>
           </button>
 
-          {/* Imagen ampliada (click sobre ella no cierra) */}
-          <figure onClick={(evento) => evento.stopPropagation()} className="text-center">
-            <Image
-              src={gallery[abierta].imagen}
-              alt={gallery[abierta].alt}
-              width={1200}
-              height={900}
-              className="max-h-[82vh] w-auto rounded-lg object-contain shadow-2xl"
-            />
-            <figcaption className="mt-3 text-sm text-white/80">
-              {gallery[abierta].alt} · {abierta + 1} / {gallery.length}
+          {/* Tarjeta de la obra: imagen + ficha (click dentro no cierra) */}
+          <figure
+            onClick={(evento) => evento.stopPropagation()}
+            className="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+          >
+            {/* Imagen sobre fondo navy (se ve completa, sin recortar) */}
+            <div className="flex shrink-0 items-center justify-center bg-navy">
+              <Image
+                src={fotoActiva.imagen}
+                alt={fotoActiva.alt}
+                width={1200}
+                height={900}
+                className="max-h-[52vh] w-auto object-contain"
+              />
+            </div>
+
+            {/* Franja diagonal tricolor de la marca */}
+            <div className="flex h-1.5 overflow-hidden" aria-hidden="true">
+              <span className="-ml-2 flex-1 -skew-x-[24deg] bg-naranja" />
+              <span className="flex-1 -skew-x-[24deg] bg-navy" />
+              <span className="-mr-2 flex-1 -skew-x-[24deg] bg-verde" />
+            </div>
+
+            {/* Ficha de la obra */}
+            <figcaption className="min-h-0 overflow-y-auto p-6 text-left sm:p-7">
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="text-lg font-extrabold text-navy sm:text-xl">
+                  {fotoActiva.lugar}
+                </h3>
+                <span className="flex-none rounded-full bg-gray-100 px-2.5 py-1 text-xs font-bold text-gristexto">
+                  {abierta + 1} / {gallery.length}
+                </span>
+              </div>
+
+              {/* Chips: producto usado y medida */}
+              {fotoActiva.producto && (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-verde/10 px-3 py-1 text-xs font-bold text-verdeoscuro">
+                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4} aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {fotoActiva.producto}
+                  </span>
+                  {fotoActiva.medida && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-naranja/10 px-3 py-1 text-xs font-bold text-naranjaoscuro">
+                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 20L20 6M9 7l-2 2m5-1l-3 3m7-1l-2 2m5-1l-3 3" />
+                      </svg>
+                      {fotoActiva.medida}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              <p className="mt-4 text-sm leading-relaxed text-gristexto sm:text-base">
+                {fotoActiva.descripcion}
+              </p>
             </figcaption>
           </figure>
 

@@ -3,12 +3,26 @@ import { site, linkWhatsApp } from '@/data/site';
 /**
  * Botones flotantes fijos en la esquina inferior derecha,
  * apilados verticalmente:
+ * - Ubicación (naranja): abre Google Maps en la dirección de la ferretería.
  * - Llamada (azul): abre el marcador del teléfono.
  * - WhatsApp (verde, con animación de pulso): abre el chat.
  */
 export default function BotonesFlotantes() {
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-center gap-3">
+      {/* Botón de ubicación: abre Google Maps en la dirección de la ferretería */}
+      <a
+        href={site.mapaLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Ver la ubicación de la ferretería en Google Maps"
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-naranjaoscuro text-white shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
+      >
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
+        </svg>
+      </a>
+
       {/* Botón de llamada */}
       <a
         href={`tel:${site.telefonoLlamada}`}

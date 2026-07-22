@@ -1,34 +1,60 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-// Enlaces de navegación hacia cada sección de la landing
+// Enlaces del menú. "Galería" es un desplegable con dos secciones:
+// la galería de la empresa y la de obras realizadas.
 const enlaces = [
   { nombre: 'Inicio', href: '#inicio' },
   { nombre: 'Quiénes Somos', href: '#quienes-somos' },
   { nombre: 'Productos', href: '#productos' },
-  { nombre: 'Galería', href: '#galeria' },
+  {
+    nombre: 'Galería',
+    submenu: [
+      { nombre: 'Nuestra Empresa', href: '#empresa', descripcion: 'Instalaciones y equipo' },
+      { nombre: 'Obras realizadas', href: '#galeria', descripcion: 'Proyectos con nuestros productos' },
+    ],
+  },
   { nombre: 'Contacto', href: '#contacto' },
 ];
 
 /**
  * Barra de navegación fija:
  * - Transparente sobre el hero y navy sólido al hacer scroll.
- * - Menú hamburguesa en móvil.
- * - Botón "Cotiza ahora" que lleva al formulario de cotización.
+ * - "Galería" despliega un submenú al pasar el cursor (o con foco).
+ * - Menú hamburguesa en móvil (el submenú se muestra desplegado).
  */
 export default function Navbar() {
-  const [conFondo, setConFondo] = useState(false); // true cuando el usuario ya hizo scroll
-  const [menuAbierto, setMenuAbierto] = useState(false); // estado del menú móvil
+  const [conFondo, setConFondo] = useState(false); // true cuando ya se hizo scroll
+  const [menuAbierto, setMenuAbierto] = useState(false); // menú móvil
+  const [galeriaAbierta, setGaleriaAbierta] = useState(false); // submenú "Galería" (escritorio)
+  const refGaleria = useRef(null);
 
-  // Cambia el fondo de transparente a navy sólido al desplazarse
   useEffect(() => {
     const alDesplazar = () => setConFondo(window.scrollY > 40);
-    alDesplazar(); // Estado correcto si la página carga ya desplazada
+    alDesplazar();
     window.addEventListener('scroll', alDesplazar, { passive: true });
     return () => window.removeEventListener('scroll', alDesplazar);
   }, []);
+
+  // Cierra el submenú "Galería" al hacer clic fuera o pulsar Escape
+  // (necesario para dispositivos táctiles, que abren con clic).
+  useEffect(() => {
+    if (!galeriaAbierta) return;
+    const alClicFuera = (evento) => {
+      if (refGaleria.current && !refGaleria.current.contains(evento.target)) {
+        setGaleriaAbierta(false);
+      }
+    };
+    const alEscape = (evento) => evento.key === 'Escape' && setGaleriaAbierta(false);
+    document.addEventListener('pointerdown', alClicFuera);
+    document.addEventListener('keydown', alEscape);
+    return () => {
+      document.removeEventListener('pointerdown', alClicFuera);
+      document.removeEventListener('keydown', alEscape);
+    };
+  }, [galeriaAbierta]);
 
   const cerrarMenu = () => setMenuAbierto(false);
 
@@ -43,8 +69,7 @@ export default function Navbar() {
         aria-label="Navegación principal"
       >
         {/* Logo combinado (los dos van SIEMPRE juntos por indicación del
-            cliente: la ferretería es Panamericana Sur y la importadora es
-            Allianz). Versión blanca: visible sobre hero y navy. */}
+            cliente). Versión blanca: visible sobre hero y navy. */}
         <a href="#inicio" onClick={cerrarMenu} aria-label="Panamericana Sur | Importadora Allianz — ir al inicio">
           <Image
             src="/images/logos/logo-combinado-blanco.png"
@@ -59,21 +84,72 @@ export default function Navbar() {
         {/* Navegación de escritorio */}
         <div className="hidden items-center gap-8 lg:flex">
           <ul className="flex items-center gap-7">
-            {enlaces.map((enlace) => (
-              <li key={enlace.href}>
-                {/* Enlace con subrayado naranja que se desliza al pasar el mouse */}
-                <a
-                  href={enlace.href}
-                  className="group relative text-sm font-semibold text-white transition-colors hover:text-naranja"
+            {enlaces.map((enlace) =>
+              enlace.submenu ? (
+                // Elemento con submenú desplegable (hover o foco)
+                <li
+                  key={enlace.nombre}
+                  ref={refGaleria}
+                  className="group relative"
+                  onMouseEnter={() => setGaleriaAbierta(true)}
+                  onMouseLeave={() => setGaleriaAbierta(false)}
                 >
-                  {enlace.nombre}
-                  <span
-                    aria-hidden="true"
-                    className="absolute -bottom-1.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-naranja transition-transform duration-300 ease-out group-hover:scale-x-100"
-                  />
-                </a>
-              </li>
-            ))}
+                  <button
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded={galeriaAbierta}
+                    onClick={() => setGaleriaAbierta((v) => !v)}
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-white transition-colors hover:text-naranja"
+                  >
+                    {enlace.nombre}
+                    <svg
+                      className={`h-4 w-4 transition-transform duration-200 ${galeriaAbierta ? 'rotate-180' : ''}`}
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Panel del submenú: se abre con hover, con clic (táctil) o
+                      con foco de teclado. El pt-3 hace de "puente" para pasar
+                      el cursor del botón al panel sin que se cierre. */}
+                  <div
+                    className={`absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 ${
+                      galeriaAbierta ? 'visible opacity-100' : 'invisible opacity-0'
+                    }`}
+                  >
+                    <ul className="overflow-hidden rounded-2xl bg-white py-2 shadow-xl ring-1 ring-black/5">
+                      {enlace.submenu.map((sub) => (
+                        <li key={sub.href}>
+                          <a
+                            href={sub.href}
+                            onClick={() => setGaleriaAbierta(false)}
+                            className="block px-4 py-3 transition-colors hover:bg-naranja/10"
+                          >
+                            <span className="block text-sm font-bold text-navy">{sub.nombre}</span>
+                            <span className="block text-xs text-gristexto">{sub.descripcion}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ) : (
+                // Enlace normal con subrayado naranja que se desliza al pasar el mouse
+                <li key={enlace.href}>
+                  <a
+                    href={enlace.href}
+                    className="group relative text-sm font-semibold text-white transition-colors hover:text-naranja"
+                  >
+                    {enlace.nombre}
+                    <span
+                      aria-hidden="true"
+                      className="absolute -bottom-1.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-naranja transition-transform duration-300 ease-out group-hover:scale-x-100"
+                    />
+                  </a>
+                </li>
+              )
+            )}
           </ul>
           <a
             href="#cotizacion"
@@ -92,12 +168,10 @@ export default function Navbar() {
           aria-expanded={menuAbierto}
         >
           {menuAbierto ? (
-            // Ícono X (cerrar)
             <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            // Ícono hamburguesa (abrir)
             <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -109,17 +183,36 @@ export default function Navbar() {
       {menuAbierto && (
         <div className="border-t border-white/10 bg-navy px-4 pb-6 pt-2 lg:hidden">
           <ul className="flex flex-col gap-1">
-            {enlaces.map((enlace) => (
-              <li key={enlace.href}>
-                <a
-                  href={enlace.href}
-                  onClick={cerrarMenu}
-                  className="block rounded-lg px-3 py-3 font-semibold text-white transition-colors hover:bg-white/10"
-                >
-                  {enlace.nombre}
-                </a>
-              </li>
-            ))}
+            {enlaces.map((enlace) =>
+              enlace.submenu ? (
+                // En móvil el submenú se muestra desplegado bajo su título
+                <li key={enlace.nombre} className="pt-2">
+                  <span className="block px-3 pb-1 text-xs font-bold uppercase tracking-wider text-white/50">
+                    {enlace.nombre}
+                  </span>
+                  {enlace.submenu.map((sub) => (
+                    <a
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={cerrarMenu}
+                      className="block rounded-lg px-3 py-3 font-semibold text-white transition-colors hover:bg-white/10"
+                    >
+                      {sub.nombre}
+                    </a>
+                  ))}
+                </li>
+              ) : (
+                <li key={enlace.href}>
+                  <a
+                    href={enlace.href}
+                    onClick={cerrarMenu}
+                    className="block rounded-lg px-3 py-3 font-semibold text-white transition-colors hover:bg-white/10"
+                  >
+                    {enlace.nombre}
+                  </a>
+                </li>
+              )
+            )}
           </ul>
           <a
             href="#cotizacion"

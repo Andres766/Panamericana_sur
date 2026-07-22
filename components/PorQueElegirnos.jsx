@@ -26,7 +26,7 @@ const razones = [
   },
   {
     titulo: 'Atención personalizada',
-    descripcion: 'Asesoría técnica incluida: te acompañamos desde la cotización hasta la instalación.',
+    descripcion: 'Asesoría técnica incluida: te acompañamos desde la cotización hasta tu proyecto.',
     icono: (
       // Ícono: conversación / asesoría
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
