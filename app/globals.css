@@ -182,6 +182,17 @@ html {
 }
 
 /* ------------------------------------------------------------
+   Cuando el chat está abierto en móvil, oculta los botones
+   flotantes de la derecha para que el panel no los tape.
+   En escritorio el chat va a la izquierda: no hace falta.
+   ------------------------------------------------------------ */
+@media (max-width: 640px) {
+  body.chat-abierto #botones-flotantes {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------
    Respeta la preferencia del usuario de reducir movimiento.
    IMPORTANTE: este bloque va DE ÚLTIMO en el archivo para
    ganarle por orden de cascada a todas las animaciones de

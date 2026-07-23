@@ -1,41 +1,44 @@
 # Landing Page — Panamericana Sur | Importadora Allianz
 
-Landing page estática construida con **Next.js 14 (App Router)** y **Tailwind CSS**,
-lista para publicarse en Hostinger. Sin backend: todas las cotizaciones se envían
-por WhatsApp.
+Landing page construida con **Next.js 14 (App Router)** y **Tailwind CSS**.
+Incluye un **asistente virtual con IA (Google Gemini)** que responde preguntas
+de los clientes. Las cotizaciones se envían por WhatsApp.
+
+> ⚠️ **Importante:** por el asistente con IA, el sitio ya **no** es 100% estático:
+> necesita una función de servidor (`app/api/chat`). Por eso se despliega en
+> **Vercel** (gratis), no en el hosting estático de Hostinger. El resto del sitio
+> sigue siendo rapidísimo; solo el chat usa el servidor.
 
 ## 🖥️ Correr el proyecto localmente
 
 ```bash
-npm install     # solo la primera vez
-npm run dev     # abre http://localhost:3000
+npm install                 # solo la primera vez
+cp .env.example .env.local  # y pon tu GEMINI_API_KEY (ver más abajo)
+npm run dev                 # abre http://localhost:3000
 ```
 
-Para previsualizar el sitio EXACTAMENTE como quedará en Hostinger
-(después de hacer el build):
+El sitio funciona sin la clave; solo el chat mostrará "asistente no configurado"
+hasta que agregues `GEMINI_API_KEY` en `.env.local`.
+
+Para probar la versión de producción localmente:
 
 ```bash
 npm run build
-npm start       # sirve la carpeta out/ en http://localhost:3000
+npm start       # http://localhost:3000
 ```
 
-## 🚀 Exportar y subir a Hostinger
+## 🚀 Desplegar en Vercel
 
-```bash
-npm run build
-```
+1. Sube el proyecto a GitHub (si aún no está).
+2. Entra a [vercel.com](https://vercel.com) → **Add New → Project** → importa el repo.
+3. Vercel detecta Next.js solo. **No cambies nada de la configuración.**
+4. En **Settings → Environment Variables** agrega:
+   - `GEMINI_API_KEY` = tu clave de [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+5. **Deploy.** En ~2 minutos el sitio queda en línea con el chat funcionando.
 
-Ese comando genera la carpeta **`out/`** con el sitio estático completo
-(HTML, CSS, JS e imágenes). Para publicarlo:
-
-1. Entra al **hPanel de Hostinger → Administrador de archivos**.
-2. Abre la carpeta **`public_html/`** (bórrale el contenido si tiene archivos de ejemplo).
-3. Sube **todo el CONTENIDO de la carpeta `out/`** (no la carpeta en sí):
-   `index.html`, la carpeta `_next/`, la carpeta `images/`, etc.
-4. Listo: el sitio queda en línea en tu dominio.
-
-> Consejo: puedes comprimir el contenido de `out/` en un `.zip`, subir ese único
-> archivo y usar la opción "Extraer" del administrador de archivos de Hostinger.
+Cada `git push` vuelve a desplegar solo. Para el dominio propio: proyecto →
+**Settings → Domains** → agrega el dominio y sigue los pasos de DNS. Recuerda
+actualizar `metadataBase` en `app/layout.js` con el dominio real.
 
 ## 📷 Estado de las imágenes
 
@@ -78,12 +81,31 @@ Cuando el cliente confirme la dirección exacta del local:
 2. Copia la URL que aparece en el atributo `src="…"` del iframe.
 3. Pégala en el campo `mapaEmbed` de `data/site.js`.
 
+## 🤖 Asistente virtual (IA con Claude)
+
+El chat flotante (abajo a la izquierda) responde preguntas sobre las tejas,
+medidas, instalación, envíos, etc.
+
+- **Cómo funciona:** el widget ([components/ChatBot.jsx](components/ChatBot.jsx))
+  llama a la función [app/api/chat/route.js](app/api/chat/route.js), que corre en
+  el servidor (Vercel) y habla con Google Gemini (vía su API REST). La clave
+  secreta vive solo en el servidor, nunca en el navegador.
+- **Conocimiento del asistente:** está en [lib/promptAsistente.js](lib/promptAsistente.js)
+  (datos del negocio y respuestas técnicas, tomados del catálogo). Edítalo para
+  cambiar lo que sabe o el tono.
+- **Modelo y costo:** usa `gemini-2.0-flash` (rápido y económico). El cliente paga
+  el consumo a Google. Para más calidad, cambia `MODELO` en `route.js` a un modelo
+  "pro" (más costoso).
+- **Clave:** define `GEMINI_API_KEY` en `.env.local` (local) y en las variables de
+  entorno de Vercel (producción). Se obtiene gratis en
+  [aistudio.google.com/apikey](https://aistudio.google.com/apikey). Ver `.env.example`.
+
 ## 📁 Estructura
 
 ```
-app/          Layout, página principal y estilos globales
-components/   Una sección de la landing por archivo
-data/         Datos editables (productos, galería, slides, negocio)
-public/       Imágenes (logos, hero, productos, galería)
-out/          ← Resultado del build: esto es lo que se sube a Hostinger
+app/            Layout, página principal, estilos y la API del chat (app/api/chat)
+components/     Una sección de la landing por archivo + ChatBot
+data/           Datos editables (productos, galería, empresa, negocio)
+lib/            Conocimiento del asistente (promptAsistente.js)
+public/         Imágenes (logos, productos, galería)
 ```

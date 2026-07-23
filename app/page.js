@@ -10,6 +10,7 @@ import FormularioCotizacion from '@/components/FormularioCotizacion';
 import MapaContacto from '@/components/MapaContacto';
 import Footer from '@/components/Footer';
 import BotonesFlotantes from '@/components/BotonesFlotantes';
+import ChatBot from '@/components/ChatBot';
 
 // ============================================================
 // Página principal: la landing completa con todas las
@@ -34,6 +35,8 @@ export default function Home() {
       </main>
       <Footer />
       <BotonesFlotantes />
+      {/* Asistente virtual con IA (chat) */}
+      <ChatBot />
     </>
   );
 }

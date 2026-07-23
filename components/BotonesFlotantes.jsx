@@ -9,7 +9,7 @@ import { site, linkWhatsApp } from '@/data/site';
  */
 export default function BotonesFlotantes() {
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-center gap-3">
+    <div id="botones-flotantes" className="fixed bottom-5 right-5 z-50 flex flex-col items-center gap-3">
       {/* Botón de ubicación: abre Google Maps en la dirección de la ferretería */}
       <a
         href={site.mapaLink}
