@@ -36,7 +36,7 @@ export default function BotonesFlotantes() {
 
       {/* Botón de WhatsApp con pulso */}
       <a
-        href={linkWhatsApp('Hola, quiero más información sobre la Teja UPVC. 🏠')}
+        href={linkWhatsApp('Hola, quiero más información sobre sus productos. 🏠')}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escribir por WhatsApp"

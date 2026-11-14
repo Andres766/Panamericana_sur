@@ -5,7 +5,7 @@ import { products } from '@/data/products';
 import { linkWhatsApp } from '@/data/site';
 
 /**
- * Sección "Nuestros Productos" (los 14 productos del catálogo oficial):
+ * Sección "Nuestros Productos" (catálogo oficial + líneas nuevas):
  * - En escritorio: cuadrícula de 4 columnas.
  * - En móvil: carrusel horizontal deslizable con CSS scroll snap
  *   (sin librerías externas).
@@ -23,8 +23,9 @@ export default function Productos() {
           </h2>
           <AcentoDiagonal className="mt-4" />
           <p className="mx-auto mt-4 max-w-2xl text-gristexto sm:text-lg">
-            Todo lo que necesitas para tu techo en un solo lugar. Desliza o
-            explora y cotiza directamente por WhatsApp.
+            De la fábrica a tu proyecto, con el respaldo de Panamericana Sur y
+            Allianz Importaciones. Desliza o explora y cotiza directamente por
+            WhatsApp.
           </p>
         </Reveal>
 
@@ -78,7 +79,7 @@ export default function Productos() {
                 {/* Texto y botón */}
                 <div className="flex flex-1 flex-col p-5">
                   <h3 className="text-base font-bold text-navy">{producto.nombre}</h3>
-                  {/* Medida y espesor (solo las tejas la tienen) */}
+                  {/* Medida y espesor (no todos los productos la tienen) */}
                   {producto.medida && (
                     <p className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-semibold text-verdeoscuro">
                       <svg className="h-3.5 w-3.5 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">

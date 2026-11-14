@@ -8,10 +8,13 @@ import { gallery } from '@/data/gallery';
 
 /**
  * Sección "Obras realizadas con nuestros productos": cuadrícula
- * responsiva de fotos (2 columnas en móvil, 4 en escritorio) con lightbox.
+ * responsiva de fotos y videos (2 columnas en móvil, 4 en escritorio)
+ * con lightbox.
  *
  * El lightbox está hecho solo con React state y CSS:
  * - Click en una foto -> se abre en grande con fondo oscuro.
+ * - Los elementos con "video" muestran un botón de play en la
+ *   miniatura y se reproducen dentro del lightbox.
  * - Se cierra con el botón X, con la tecla Escape o tocando el fondo.
  * - Flechas y teclado para pasar de foto sin cerrar.
  * - Accesible: al abrir, el foco pasa al botón de cerrar; Tab circula
@@ -88,7 +91,7 @@ export default function Galeria() {
           <AcentoDiagonal className="mt-4" />
           <p className="mx-auto mt-4 max-w-2xl text-gristexto sm:text-lg">
             Proyectos reales hechos con nuestros productos. Toca cualquier foto
-            para ver los detalles.
+            o video para ver los detalles.
           </p>
         </Reveal>
 
@@ -101,26 +104,50 @@ export default function Galeria() {
               <button
                 type="button"
                 onClick={() => setAbierta(i)}
-                aria-label={`Ampliar: ${foto.alt}`}
+                aria-label={foto.video ? `Reproducir video: ${foto.alt}` : `Ampliar: ${foto.alt}`}
                 className="group relative block aspect-square w-full overflow-hidden rounded-xl focus:outline-none focus:ring-2 focus:ring-naranja"
               >
-                <Image
-                  src={foto.imagen}
-                  alt={foto.alt}
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {/* Velo con ícono de lupa al pasar el mouse */}
-                <span className="absolute inset-0 flex items-center justify-center bg-navy/0 transition-colors duration-300 group-hover:bg-navy/40">
-                  <svg
-                    className="h-8 w-8 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m-3-3h6" />
-                  </svg>
-                </span>
+                {foto.video && !foto.imagen ? (
+                  // Video sin póster: el navegador muestra el primer fotograma
+                  <video
+                    src={foto.video}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                ) : (
+                  <Image
+                    src={foto.imagen}
+                    alt={foto.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                )}
+                {foto.video ? (
+                  // Botón de play siempre visible sobre los videos
+                  <span className="absolute inset-0 flex items-center justify-center bg-navy/25 transition-colors duration-300 group-hover:bg-navy/40">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-300 group-hover:scale-110">
+                      <svg className="ml-1 h-7 w-7 text-navy" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5.14v13.72c0 .86.93 1.4 1.68.96l11-6.86a1.12 1.12 0 000-1.92l-11-6.86A1.12 1.12 0 008 5.14z" />
+                      </svg>
+                    </span>
+                  </span>
+                ) : (
+                  /* Velo con ícono de lupa al pasar el mouse */
+                  <span className="absolute inset-0 flex items-center justify-center bg-navy/0 transition-colors duration-300 group-hover:bg-navy/40">
+                    <svg
+                      className="h-8 w-8 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m-3-3h6" />
+                    </svg>
+                  </span>
+                )}
               </button>
               </Reveal>
             </li>
@@ -171,15 +198,29 @@ export default function Galeria() {
             onClick={(evento) => evento.stopPropagation()}
             className="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
           >
-            {/* Imagen sobre fondo navy (se ve completa, sin recortar) */}
+            {/* Imagen o video sobre fondo navy (se ve completo, sin recortar) */}
             <div className="flex shrink-0 items-center justify-center bg-navy">
-              <Image
-                src={fotoActiva.imagen}
-                alt={fotoActiva.alt}
-                width={1200}
-                height={900}
-                className="max-h-[52vh] w-auto object-contain"
-              />
+              {fotoActiva.video ? (
+                <video
+                  key={fotoActiva.video} // Reinicia el video al cambiar de elemento
+                  src={fotoActiva.video}
+                  controls
+                  autoPlay
+                  playsInline
+                  poster={fotoActiva.imagen || undefined}
+                  className="max-h-[52vh] w-auto"
+                >
+                  Tu navegador no puede reproducir este video.
+                </video>
+              ) : (
+                <Image
+                  src={fotoActiva.imagen}
+                  alt={fotoActiva.alt}
+                  width={1200}
+                  height={900}
+                  className="max-h-[52vh] w-auto object-contain"
+                />
+              )}
             </div>
 
             {/* Franja diagonal tricolor de la marca */}

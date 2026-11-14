@@ -5,12 +5,12 @@ import { SYSTEM_ASISTENTE } from '@/lib/promptAsistente';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-// Modelo de Gemini. "flash" es rápido y económico, ideal para atención.
-// 'gemini-flash-latest' apunta siempre al último flash disponible y tiene
-// cupo en el nivel gratuito de este proyecto (verificado jul 2026).
-// Alternativas con cupo gratis: 'gemini-flash-lite-latest' (más liviano) o
-// 'gemini-3.6-flash'. Para más calidad, un modelo "pro" (más costoso).
-const MODELO = 'gemini-flash-latest';
+// Modelo de Gemini. "flash-lite" es el más rápido y con mejor cupo
+// gratuito: respondió en ~1 s, mientras que 'gemini-flash-latest'
+// tardaba 90+ segundos con esta clave (verificado nov 2026).
+// Alternativas: 'gemini-flash-latest' (más calidad, hoy lento en el
+// nivel gratuito) o un modelo "pro" (más costoso).
+const MODELO = 'gemini-flash-lite-latest';
 
 // Límites para proteger el costo y evitar abusos
 const MAX_MENSAJES = 20; // solo se conservan los últimos N turnos

@@ -1,14 +1,17 @@
 // ============================================================
 // Productos de la sección "Nuestros Productos".
 //
-// Los productos salen del catálogo oficial del cliente
-// (catalogo_ferreteria_panamericana.pdf). Las imágenes son los
+// Los productos 1-14 salen del catálogo oficial del cliente
+// (catalogo_ferreteria_panamericana.pdf); sus imágenes son los
 // renders reales del catálogo, ya optimizados en
-// public/images/productos/.
+// public/images/productos/. Los productos 15-19 (WPC, UV mármol,
+// lámina policarbonato, tanque y contenedores) los envió el cliente
+// por WhatsApp (nov 2026); sus imágenes son PROVISIONALES hasta
+// recibir las fotos reales (reemplazar el archivo con el mismo nombre).
 //
 // Campos:
 // - nombre:      igual que en el catálogo.
-// - medida:      largo × ancho y espesor (solo las tejas la tienen;
+// - medida:      largo × ancho y espesor (no todos la tienen;
 //                el catálogo no da medidas de caballetes/accesorios).
 // - descripcion: resumen corto de la ficha del catálogo.
 // - imagen:      render del producto (fondo blanco).
@@ -117,5 +120,44 @@ export const products = [
     descripcion:
       'La fuerza que construye grandes proyectos. Cemento de alta calidad, ideal para viviendas, edificaciones, obras civiles y remodelaciones.',
     imagen: '/images/productos/cemento-cemex.jpg',
+  },
+  {
+    id: 15,
+    nombre: 'Panel WPC Interior (palillería)',
+    medida: 'Largo 2.90 m × Ancho 16.8 cm · Espesor 2.4 cm',
+    descripcion:
+      'Revestimiento de acanalado vertical en WPC para interiores: la elegancia del acabado en madera para salas, cabeceras de cama y muros acentuados. Liviano, resistente a la humedad, sin mantenimiento y de instalación rápida.',
+    imagen: '/images/productos/panel-wpc-interior.jpg',
+  },
+  {
+    id: 16,
+    nombre: 'Lámina UV Mármol',
+    medida: 'Alto 2.44 m × Ancho 1.22 m · Espesor 2.5 mm',
+    descripcion:
+      'El sofisticado acabado del mármol real sin obra pesada: láminas de PVC con recubrimiento UV, brillo impecable, vetas ultrarrealistas y alta resistencia al desgaste, la humedad y las manchas. Perfectas para salas, recepciones, baños y muros acentuados.',
+    imagen: '/images/productos/lamina-uv-marmol.jpg',
+  },
+  {
+    id: 17,
+    nombre: 'Lámina Policarbonato Cristal',
+    medida: 'Largo 11.80 m × Ancho 2.10 m · Espesor 6 mm',
+    descripcion:
+      'Plástico transparente muy resistente al impacto, ideal para aprovechar la luz natural: invernaderos, cubiertas, techos de centros comerciales, terrazas, piscinas, patios y fachadas. Ligera y fácil de manipular.',
+    imagen: '/images/productos/lamina-policarbonato-cristal.jpg',
+  },
+  {
+    id: 18,
+    nombre: 'Tanque de Agua en Acero Galvanizado 5.000 L',
+    medida: 'Capacidad 5.000 L · Diámetro 3 m × Alto 0.92 m · Lámina 1.2 mm',
+    descripcion:
+      'Tanque circular de almacenamiento de agua en acero galvanizado con cubierta metálica. Una solución para fincas, proyectos agrícolas, industriales y de construcción.',
+    imagen: '/images/productos/tanque-acero-galvanizado.jpg',
+  },
+  {
+    id: 19,
+    nombre: 'Contenedores',
+    descripcion:
+      'La solución definitiva para almacenamiento seguro, transporte de carga o proyectos de construcción modular. Ideales para bodegas, oficinas móviles y proyectos arquitectónicos.',
+    imagen: '/images/productos/contenedores.jpg',
   },
 ];

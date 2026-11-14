@@ -36,7 +36,7 @@ const razones = [
   },
   {
     titulo: 'Entregas a domicilio',
-    descripcion: 'Cubrimos todo el sur del país: tu pedido llega directo a la puerta de tu proyecto.',
+    descripcion: 'Despachamos a diferentes regiones de Colombia: tu pedido llega directo a tu proyecto.',
     icono: (
       // Ícono: camión de reparto
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">

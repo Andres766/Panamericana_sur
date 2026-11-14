@@ -48,16 +48,26 @@ mismo nombre** (no hay que tocar el código) y vuelve a ejecutar `npm run build`
 
 | Carpeta | Archivos | Estado |
 | --- | --- | --- |
-| `public/images/productos/` | 14 renders con nombre descriptivo (`teja-upvc-colonial.jpg`, `cemento-cemex.jpg`, …) | ✔ Reales, del catálogo (páginas 2–15) |
-| `public/images/galeria/` | `foto1.jpg` … `foto6.jpg` | ✔ Reales: 6 obras con lugar, producto y medida (ver `data/gallery.js`). Para agregar más, copia `foto7.jpg`… y añade su objeto en `data/gallery.js` |
-| `public/images/empresa/` | `empresa1.jpg` … `empresa8.jpg` | ⏳ Provisionales: hoy son placeholders de picsum.photos (ver `data/empresa.js`) |
+| `public/images/productos/` | 14 renders del catálogo (`teja-upvc-colonial.jpg`, …) + 5 líneas nuevas (`panel-wpc-interior.jpg`, `lamina-uv-marmol.jpg`, `lamina-policarbonato-cristal.jpg`, `tanque-acero-galvanizado.jpg`, `contenedores.jpg`) | ✔ Reales los 14 del catálogo · ⏳ Las 5 nuevas son placeholders: reemplazar con las fotos del cliente (mismo nombre) |
+| `public/images/galeria/` | `foto1.jpg` … `foto12.jpg` | ✔ Reales: 12 obras con lugar, producto y área (ver `data/gallery.js`). Para agregar más, copia `foto13.jpg`… y añade su objeto en `data/gallery.js` |
+| `public/images/empresa/` | `empresa1.jpg` … `empresa8.jpg` | ✔ Reales: punto de venta, bodega, importación y despachos (nov 2026) |
 | `public/images/logos/` | `logo-*.png` | ✔ Reales |
 
 > El hero ya no usa carrusel de fotos: ahora es un fondo de marca (navy con el símbolo de la marca). Por eso se eliminó la carpeta `public/images/hero/`.
 
-Fotos reales de la galería: `foto1` Colegio San Felipe Neri · `foto2` Parque
-Bolívar · `foto3` Plazoleta de comidas (Morasurco) · `foto4` y `foto5` Colegio
-San Juan de Pasto (colonial y policarbonato) · `foto6` descarga de contenedor.
+Fotos reales de la galería: `foto1` Colegio San Felipe Neri (680 m²) · `foto2`
+Parque Bolívar (620 m²) · `foto3` y `foto7` Plaza de comidas Gourmet (Morasurco) ·
+`foto4` y `foto5` Colegio San Juan de Pasto · `foto6` descarga de contenedor ·
+`foto8` y `foto9` obra Sandoná (colonial) · `foto10` El Encano (920 m²) ·
+`foto11` Jongovito (740 m²) · `foto12` Bellavista, Catambuco (740 m²).
+
+La galería también incluye 2 **videos de obras** (Morasurco y Alto Putumayo),
+que viven en `public/videos/` y se reproducen en el lightbox.
+
+Los originales del cliente (fotos y videos en alta resolución, organizados por
+obra) están en `material-cliente/` (no se sube a git ni al deploy). En
+`material-cliente/por-clasificar/` hay 2 fotos y 1 video sin identificar:
+confirmar con el cliente de qué obra son.
 
 El archivo original de cada producto está en
 `C:\Users\andse\Downloads\productos_panamericana\` y el mapeo completo en
@@ -68,9 +78,9 @@ El archivo original de cada producto está en
 | Archivo | Qué se edita |
 | --- | --- |
 | `data/site.js` | Teléfonos, WhatsApp, ciudad, horario, URL del mapa, redes sociales |
-| `data/products.js` | Nombres, medidas y descripciones de los 14 productos del catálogo |
+| `data/products.js` | Nombres, medidas y descripciones de los 19 productos (14 del catálogo + 5 líneas nuevas de nov 2026) |
 | `data/gallery.js` | Textos alternativos de la galería |
-| `data/empresa.js` | Fotos de la sección "Nuestra Empresa" (placeholders por ahora) |
+| `data/empresa.js` | Fotos de la sección "Nuestra Empresa" (reales desde nov 2026) |
 | `tailwind.config.js` | Colores de marca (navy, naranja, verde, gris) |
 
 ### Actualizar el mapa de Google
@@ -81,7 +91,20 @@ Cuando el cliente confirme la dirección exacta del local:
 2. Copia la URL que aparece en el atributo `src="…"` del iframe.
 3. Pégala en el campo `mapaEmbed` de `data/site.js`.
 
-## 🤖 Asistente virtual (IA con Claude)
+## 📈 Google Analytics y Facebook Pixel
+
+El sitio trae integradas las dos herramientas de medición de campañas; solo
+hay que poner los IDs como variables de entorno (en `.env.local` y en Vercel):
+
+| Variable | Dónde se obtiene |
+| --- | --- |
+| `NEXT_PUBLIC_GA_ID` | [analytics.google.com](https://analytics.google.com) → Administrar → Flujos de datos (ID "G-…") |
+| `NEXT_PUBLIC_FB_PIXEL_ID` | [business.facebook.com](https://business.facebook.com) → Administrador de eventos (ID numérico) |
+
+Si una variable no está definida, ese script **no se carga** (no afecta la
+velocidad ni la privacidad hasta que el cliente cree las cuentas).
+
+## 🤖 Asistente virtual (IA con Google Gemini)
 
 El chat flotante (abajo a la izquierda) responde preguntas sobre las tejas,
 medidas, instalación, envíos, etc.

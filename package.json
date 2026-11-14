@@ -2,7 +2,7 @@
   "name": "panamericana-sur-landing",
   "version": "1.0.0",
   "private": true,
-  "description": "Landing page de Panamericana Sur | Importadora Allianz - Teja UPVC en Colombia",
+  "description": "Landing page de Panamericana Sur | Importadora Allianz - Soluciones para construcción, cubiertas y acabados",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

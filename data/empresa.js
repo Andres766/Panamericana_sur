@@ -1,21 +1,19 @@
 // ============================================================
 // Fotos de la sección "Nuestra Empresa".
 //
-// PROVISIONAL: hoy son placeholders de picsum.photos. Cuando el
-// cliente envíe las fotos reales (fachada, bodega, equipo, etc.),
-// guárdalas en public/images/empresa/ (empresa1.jpg ... empresa8.jpg)
-// y cambia cada "imagen" a la ruta local, p. ej.:
-//   imagen: '/images/empresa/empresa1.jpg'
-// Al ser locales, se puede quitar picsum de next.config.mjs.
+// Fotos REALES enviadas por el cliente (nov 2026): punto de venta,
+// bodega, importaciones y despachos. Los originales están en
+// material-cliente/empresa-y-despachos/. Para cambiar una foto,
+// reemplaza el archivo en public/images/empresa/ con el mismo nombre.
 // ============================================================
 
 export const fotosEmpresa = [
-  { id: 1, imagen: 'https://picsum.photos/seed/panasur-fachada/800/800', alt: 'Fachada del punto de venta (foto provisional)' },
-  { id: 2, imagen: 'https://picsum.photos/seed/panasur-bodega/800/800', alt: 'Bodega de tejas UPVC (foto provisional)' },
-  { id: 3, imagen: 'https://picsum.photos/seed/panasur-showroom/800/800', alt: 'Sala de exhibición (foto provisional)' },
-  { id: 4, imagen: 'https://picsum.photos/seed/panasur-equipo/800/800', alt: 'Equipo de trabajo (foto provisional)' },
-  { id: 5, imagen: 'https://picsum.photos/seed/panasur-despacho/800/800', alt: 'Despacho de pedidos (foto provisional)' },
-  { id: 6, imagen: 'https://picsum.photos/seed/panasur-inventario/800/800', alt: 'Inventario de productos (foto provisional)' },
-  { id: 7, imagen: 'https://picsum.photos/seed/panasur-atencion/800/800', alt: 'Atención al cliente (foto provisional)' },
-  { id: 8, imagen: 'https://picsum.photos/seed/panasur-transporte/800/800', alt: 'Transporte y entregas (foto provisional)' },
+  { id: 1, imagen: '/images/empresa/empresa1.jpg', alt: 'Punto de venta de Panamericana Sur con despacho de teja UPVC azul' },
+  { id: 2, imagen: '/images/empresa/empresa2.jpg', alt: 'Bodega con inventario de teja UPVC colonial' },
+  { id: 3, imagen: '/images/empresa/empresa3.jpg', alt: 'Control de calidad de la teja UPVC importada en contenedor' },
+  { id: 4, imagen: '/images/empresa/empresa4.jpg', alt: 'Descargue de contenedor con teja UPVC colonial importada' },
+  { id: 5, imagen: '/images/empresa/empresa5.jpg', alt: 'Descargue de teja UPVC con grúa frente al punto de venta' },
+  { id: 6, imagen: '/images/empresa/empresa6.jpg', alt: 'Descargue de lámina de policarbonato cristal' },
+  { id: 7, imagen: '/images/empresa/empresa7.jpg', alt: 'Despiece de teja UPVC cresta alta lista para despacho' },
+  { id: 8, imagen: '/images/empresa/empresa8.jpg', alt: 'Camión cargado con teja UPVC cresta alta para entrega' },
 ];

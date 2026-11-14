@@ -9,14 +9,14 @@ const ENDPOINT = process.env.NEXT_PUBLIC_CHAT_API_URL || '/api/chat';
 
 // Mensaje de bienvenida (solo se muestra; no se envía al modelo)
 const SALUDO =
-  '¡Hola! 👋 Soy el asistente de Panamericana Sur. Pregúntame sobre nuestras tejas UPVC, medidas, instalación, envíos y más.';
+  '¡Hola! 👋 Soy el asistente de Panamericana Sur. Pregúntame sobre nuestras tejas UPVC, paneles WPC, láminas UV tipo mármol, medidas, instalación, envíos y más.';
 
 // Preguntas sugeridas (botones rápidos)
 const SUGERENCIAS = [
   '¿La teja UPVC disminuye el calor?',
-  '¿Diferencia entre cresta alta y baja?',
+  '¿Qué es el panel WPC interior?',
+  '¿Qué son las láminas UV tipo mármol?',
   '¿Hacen envíos fuera de Pasto?',
-  '¿La teja se oxida?',
   '¿Cuántas tejas necesito?',
 ];
 

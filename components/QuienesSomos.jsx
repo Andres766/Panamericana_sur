@@ -7,7 +7,7 @@ const pilares = [
   {
     titulo: 'Importadores directos',
     descripcion:
-      'Traemos la Teja UPVC directamente del fabricante: sin intermediarios y con calidad garantizada.',
+      'Importamos directamente nuestras líneas de Tejas UPVC, WPC y paneles UV tipo mármol, ofreciendo calidad, respaldo y precios competitivos.',
     icono: (
       // Ícono: barco de carga / importación
       <svg className="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
@@ -16,9 +16,9 @@ const pilares = [
     ),
   },
   {
-    titulo: 'Envíos a todo el sur del país',
+    titulo: 'Envíos a todo el país',
     descripcion:
-      'Llevamos tu pedido hasta la obra: cubrimos Nariño, Putumayo, Cauca y todo el sur de Colombia.',
+      'Despachamos nuestros productos a diferentes regiones de Colombia, atendiendo proyectos de construcción, remodelación y acabados.',
     icono: (
       // Ícono: camión de entregas
       <svg className="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
@@ -28,9 +28,9 @@ const pilares = [
     ),
   },
   {
-    titulo: 'Atención personalizada',
+    titulo: 'Asesoría personalizada',
     descripcion:
-      'Te asesoramos en cada paso del proyecto para que elijas la cubierta ideal según tu necesidad.',
+      'Te acompañamos para elegir la solución adecuada según tu proyecto, presupuesto y necesidades, desde cubiertas hasta acabados interiores y exteriores.',
     icono: (
       // Ícono: asesor / auriculares de soporte
       <svg className="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
@@ -63,16 +63,16 @@ export default function QuienesSomos() {
           </h2>
           <AcentoDiagonal className="mt-4" />
           <p className="mt-5 text-base leading-relaxed text-gristexto sm:text-lg">
-            En la ferretería{' '}
-            <strong className="text-navy">Panamericana Sur</strong>, junto a la{' '}
-            <strong className="text-navy">Importadora Allianz</strong>, somos
-            especialistas en soluciones para techos y cubiertas. Importamos
+            <strong className="text-navy">Ferretería Panamericana Sur</strong>, junto a{' '}
+            <strong className="text-navy">Importadora Allianz</strong>, ofrece
+            soluciones para construcción, cubiertas y acabados. Importamos
             directamente{' '}
-            <strong className="text-navy">Tejas UPVC termoacústicas</strong> de la
-            más alta calidad y las llevamos hasta tu obra: viviendas, bodegas,
-            fincas, locales comerciales, galpones, coliseos, escenarios
-            deportivos, proyectos industriales, terrazas o remodelaciones en todo
-            el sur de Colombia.
+            <strong className="text-navy">Tejas UPVC termoacústicas</strong>,{' '}
+            <strong className="text-navy">WPC para interiores y exteriores</strong> y{' '}
+            <strong className="text-navy">paneles UV tipo mármol</strong>,
+            seleccionando productos modernos, resistentes y de alta calidad para
+            viviendas, bodegas, locales comerciales, proyectos industriales y
+            remodelaciones.
           </p>
 
           {/* Trayectoria destacada */}

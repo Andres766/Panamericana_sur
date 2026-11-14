@@ -53,15 +53,16 @@ export default function Hero() {
           <span className="text-naranja">construimos confianza</span>
         </h1>
         <p className="animacion-entrada mx-auto mt-5 max-w-2xl text-base font-medium text-white/90 [animation-delay:1200ms] sm:text-lg lg:text-xl">
-          Importadores directos de Tejas UPVC Termoacústica, que brindan
-          soluciones resistentes al calor, la humedad y la corrosión para
-          viviendas, bodegas, fincas y locales comerciales.
+          Importadores directos de soluciones para construcción y acabados:
+          tejas UPVC termoacústicas, WPC para interiores y exteriores, paneles
+          UV tipo mármol y más. Productos modernos, resistentes y de excelente
+          presentación para viviendas, proyectos comerciales y grandes obras.
         </p>
 
         {/* Botones de acción */}
         <div className="animacion-entrada mt-9 flex flex-col items-center justify-center gap-4 [animation-delay:1325ms] sm:flex-row">
           <a
-            href={linkWhatsApp('Hola, quiero cotizar Teja UPVC con Panamericana Sur. 🏠')}
+            href={linkWhatsApp('Hola, quiero cotizar con Panamericana Sur. 🏠')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 rounded-full bg-verdeoscuro px-8 py-4 text-base font-bold text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95"

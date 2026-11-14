@@ -192,7 +192,7 @@ export default function FormularioCotizacion() {
                   id="productoInteres"
                   name="productoInteres"
                   type="text"
-                  placeholder="Ej: Teja UPVC Termoacústica cresta baja"
+                  placeholder="Ej: Teja UPVC cresta baja, panel WPC, lámina UV mármol…"
                   value={datos.productoInteres}
                   onChange={alCambiar}
                   className={estiloCampo}

@@ -11,6 +11,10 @@
 .env*
 !.env.example
 
+# Material original del cliente (fotos y videos sin procesar; pesa mucho
+# y no se despliega. Las versiones web están en public/images/)
+/material-cliente
+
 # Basura de Windows
 Thumbs.db
 desktop.ini
