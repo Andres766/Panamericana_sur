@@ -24,10 +24,10 @@ export const gallery = [
   {
     id: 1,
     imagen: '/images/galeria/foto1.jpg',
-    alt: 'Cubierta en teja UPVC blanca cresta baja — Colegio San Felipe Neri',
+    alt: 'Cubierta en teja UPVC blanca cresta alta — Colegio San Felipe Neri',
     lugar: 'Colegio San Felipe Neri, Pasto',
-    producto: 'Teja UPVC Blanca Cresta Baja',
-    medida: 'Largo 11.80 m × Ancho 1.13 m',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
+    medida: 'Área cubierta: 680 m²',
     descripcion:
       'Cubierta metálica en arco de 680 m² para las zonas comunes del colegio, instalada con teja UPVC blanca para lograr aislamiento térmico y una larga vida útil sin corrosión.',
   },
@@ -36,8 +36,8 @@ export const gallery = [
     imagen: '/images/galeria/foto2.jpg',
     alt: 'Cubierta en teja UPVC blanca cresta alta — Parque Bolívar',
     lugar: 'Parque Bolívar, Pasto',
-    producto: 'Teja UPVC Blanca Cresta Alta',
-    medida: 'Largo 11.80 m × Ancho 1.07 m',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
+    medida: 'Área cubierta: 620 m²',
     descripcion:
       'Estructura en arco de 620 m² para espacio público, cubierta con teja UPVC de cresta alta, que soporta grandes luces y resiste la humedad y el clima frío de la región.',
   },
@@ -46,7 +46,7 @@ export const gallery = [
     imagen: '/images/galeria/foto3.jpg',
     alt: 'Cubierta en teja UPVC blanca cresta alta — Plazoleta de comidas, sector Morasurco',
     lugar: 'Plazoleta de comidas, sector Morasurco',
-    producto: 'Teja UPVC Blanca Cresta Alta',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
     medida: 'Largo 11.80 m × Ancho 1.07 m',
     descripcion:
       'Cubierta para zona comercial de comidas con teja UPVC blanca de cresta alta, que reduce el ruido de la lluvia y el calor interior para mayor comodidad de los visitantes.',
@@ -57,7 +57,7 @@ export const gallery = [
     alt: 'Techo en teja UPVC colonial — Colegio San Juan de Pasto',
     lugar: 'Colegio San Juan de Pasto',
     producto: 'Teja UPVC Colonial',
-    medida: 'Largo 10.66 m × Ancho 1.05 m',
+    medida: 'Largo 11.80 m × Ancho 1.05 m',
     descripcion:
       'Techo con acabado colonial que combina la estética tradicional con la tecnología UPVC: menor peso sobre la estructura, alta resistencia a la humedad y muy poco mantenimiento.',
   },
@@ -86,7 +86,7 @@ export const gallery = [
     imagen: '/images/galeria/foto7.jpg',
     alt: 'Interior terminado de la plaza de comidas Gourmet — sector Morasurco',
     lugar: 'Plaza de comidas Gourmet, sector Morasurco',
-    producto: 'Teja UPVC Blanca Cresta Alta',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
     medida: 'Largo 11.80 m × Ancho 1.07 m',
     descripcion:
       'Interior terminado de la plaza de comidas: la cubierta en teja UPVC aporta confort térmico y acústico a un espacio comercial moderno y acogedor.',
@@ -97,7 +97,7 @@ export const gallery = [
     alt: 'Cubiertas en teja UPVC colonial — obra en Sandoná',
     lugar: 'Sandoná, Nariño',
     producto: 'Teja UPVC Colonial',
-    medida: 'Largo 10.66 m × Ancho 1.05 m',
+    medida: 'Largo 11.80 m × Ancho 1.05 m',
     descripcion:
       'Conjunto de cubiertas en teja UPVC colonial que conserva la estética tradicional del municipio con un material liviano, durable y sin mantenimiento.',
   },
@@ -107,7 +107,7 @@ export const gallery = [
     alt: 'Detalle de cubierta en teja UPVC colonial con caballetes — Sandoná',
     lugar: 'Sandoná, Nariño',
     producto: 'Teja UPVC Colonial + Caballetes',
-    medida: 'Largo 10.66 m × Ancho 1.05 m',
+    medida: 'Largo 11.80 m × Ancho 1.05 m',
     descripcion:
       'Detalle del acabado: teja colonial con sus caballetes instalados, que rematan la cumbrera, impermeabilizan la cubierta y logran un terminado uniforme.',
   },
@@ -142,12 +142,42 @@ export const gallery = [
       'Cubierta de 740 m² en teja UPVC cresta alta blanca de 2.5 mm para el polideportivo de Bellavista, resistente al clima frío y a la humedad de la zona rural.',
   },
   {
+    id: 17,
+    imagen: '/images/galeria/foto15.jpg',
+    alt: 'Polideportivo Bellavista terminado, con cubierta en arco de teja UPVC — Catambuco',
+    lugar: 'Polideportivo Bellavista, corregimiento de Catambuco',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
+    medida: 'Área cubierta: 740 m²',
+    descripcion:
+      'La obra terminada: cancha cubierta en arco frente a la iglesia del sector Bellavista, con teja UPVC que da sombra, protege de la lluvia y soporta grandes luces.',
+  },
+  {
+    id: 15,
+    imagen: '/images/galeria/foto13.jpg',
+    alt: 'Cubierta a dos aguas en teja UPVC blanca cresta alta — Obra Fuertes Mejía',
+    lugar: 'Obra Fuertes Mejía',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
+    medida: 'Largo 11.80 m × Ancho 1.07 m',
+    descripcion:
+      'Cubierta a dos aguas sobre estructura metálica: la teja UPVC no se oxida y resiste la humedad y el clima de montaña.',
+  },
+  {
+    id: 16,
+    imagen: '/images/galeria/foto14.jpg',
+    alt: 'Instalación de teja UPVC blanca cresta alta — Obra Fuertes Mejía',
+    lugar: 'Obra Fuertes Mejía',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
+    medida: 'Largo 11.80 m × Ancho 1.07 m',
+    descripcion:
+      'Vista interior durante la instalación: la teja de 11.80 m cubre grandes luces con pocas uniones, lo que agiliza el montaje y reduce los puntos de filtración.',
+  },
+  {
     id: 13,
     video: '/videos/obra-plaza-comidas-morasurco.mp4',
     imagen: '/videos/poster-morasurco.jpg',
     alt: 'Video de la obra de la plaza de comidas Gourmet — sector Morasurco',
     lugar: 'Plaza de comidas Gourmet, sector Morasurco',
-    producto: 'Teja UPVC Blanca Cresta Alta',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
     medida: 'Largo 11.80 m × Ancho 1.07 m',
     descripcion:
       'Recorrido en video por la obra de la plaza de comidas: estructura metálica y cubierta en teja UPVC blanca de cresta alta, del montaje al interior terminado.',
@@ -157,8 +187,8 @@ export const gallery = [
     video: '/videos/obra-putumayo-santiago.mp4',
     alt: 'Video de obra en el municipio de Santiago, Alto Putumayo',
     lugar: 'Municipio de Santiago, Alto Putumayo',
-    producto: '',
-    medida: '',
+    producto: 'Teja UPVC Blanca Cresta Alta · 2.5 mm',
+    medida: 'Largo 11.80 m × Ancho 1.07 m',
     descripcion:
       'Video de obra en el Alto Putumayo: nuestros productos llegan a proyectos en diferentes regiones, con despacho hasta el sitio de la obra.',
   },

@@ -100,7 +100,9 @@ export default function MapaContacto() {
                 </span>
                 <div>
                   <h3 className="font-bold text-navy">Horario de atención</h3>
-                  <p className="text-gristexto">{site.horario}</p>
+                  {site.horario.map((linea) => (
+                    <p key={linea} className="text-gristexto">{linea}</p>
+                  ))}
                 </div>
               </div>
 

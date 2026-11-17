@@ -4,15 +4,25 @@
 // Los productos 1-14 salen del catálogo oficial del cliente
 // (catalogo_ferreteria_panamericana.pdf); sus imágenes son los
 // renders reales del catálogo, ya optimizados en
-// public/images/productos/. Los productos 15-19 (WPC, UV mármol,
-// lámina policarbonato, tanque y contenedores) los envió el cliente
-// por WhatsApp (nov 2026); sus imágenes son PROVISIONALES hasta
-// recibir las fotos reales (reemplazar el archivo con el mismo nombre).
+// public/images/productos/. Los productos 15-20 (WPC interior y
+// exterior, UV mármol, lámina policarbonato, tanque y contenedores)
+// los envió el cliente por WhatsApp (nov 2026), con fotos de
+// ambiente de referencia (no son renders sobre fondo blanco, por eso
+// llevan fotoAmbiente). La de contenedores es PROVISIONAL, tomada de
+// Wikimedia Commons: reemplazar contenedores.jpg con el mismo nombre.
 //
 // Campos:
 // - nombre:      igual que en el catálogo.
 // - medida:      largo × ancho y espesor (no todos la tienen;
 //                el catálogo no da medidas de caballetes/accesorios).
+// - colores:     (opcional) colores disponibles; se muestran como
+//                puntos de color en la tarjeta. Valores válidos: los
+//                definidos en COLORES de components/Productos.jsx.
+// - fotoAmbiente: (opcional) true si la imagen es una foto de ambiente
+//                que debe llenar el recuadro (en vez de un render
+//                sobre fondo blanco, que se muestra completo).
+// - credito:     (opcional) { texto, url } para fotos con licencia que
+//                exige atribución; se muestra sobre la imagen.
 // - descripcion: resumen corto de la ficha del catálogo.
 // - imagen:      render del producto (fondo blanco).
 // ============================================================
@@ -20,16 +30,18 @@
 export const products = [
   {
     id: 1,
-    nombre: 'Teja UPVC Blanca Cresta Baja',
+    nombre: 'Teja UPVC Cresta Baja',
     medida: 'Largo 11.80 m × Ancho 1.13 m · Espesor 2 mm',
+    colores: ['roja', 'azul', 'blanca'],
     descripcion:
       'Ligera, resistente y eficiente. Excelente aislamiento térmico y alta resistencia a la corrosión. Ideal para viviendas, bodegas, galpones y proyectos comerciales.',
     imagen: '/images/productos/teja-upvc-blanca-cresta-baja.jpg',
   },
   {
     id: 2,
-    nombre: 'Teja UPVC Blanca Cresta Alta',
+    nombre: 'Teja UPVC Cresta Alta',
     medida: 'Largo 11.80 m × Ancho 1.07 m · Espesor 2.5 mm',
+    colores: ['roja', 'azul', 'blanca'],
     descripcion:
       'Mayor rigidez para grandes luces. Ideal para bodegas, centros logísticos, instalaciones industriales, escenarios deportivos y proyectos agropecuarios.',
     imagen: '/images/productos/teja-upvc-blanca-cresta-alta.jpg',
@@ -37,7 +49,7 @@ export const products = [
   {
     id: 3,
     nombre: 'Teja UPVC Colonial',
-    medida: 'Largo 10.66 m × Ancho 1.05 m · Espesor 2 mm',
+    medida: 'Largo 11.80 m × Ancho 1.05 m · Espesor 2.5 mm',
     descripcion:
       'La elegancia de la teja tradicional con la tecnología del UPVC: menor peso, mayor durabilidad, requiere muy poco mantenimiento y alta resistencia. Ideal para viviendas, hoteles y fincas.',
     imagen: '/images/productos/teja-upvc-colonial.jpg',
@@ -128,6 +140,16 @@ export const products = [
     descripcion:
       'Revestimiento de acanalado vertical en WPC para interiores: la elegancia del acabado en madera para salas, cabeceras de cama y muros acentuados. Liviano, resistente a la humedad, sin mantenimiento y de instalación rápida.',
     imagen: '/images/productos/panel-wpc-interior.jpg',
+    fotoAmbiente: true,
+  },
+  {
+    id: 20,
+    nombre: 'Panel WPC Exterior',
+    medida: 'Largo 2.90 m × Ancho 21.9 cm · Espesor 2.6 cm',
+    descripcion:
+      'Diseño vanguardista sin mantenimiento para fachadas y muros: la calidez de la madera con la resistencia de la tecnología polimérica. 100% impermeable, no requiere barniz ni pintura, no pierde color con el sol y se instala con fijación oculta.',
+    imagen: '/images/productos/panel-wpc-exterior.jpg',
+    fotoAmbiente: true,
   },
   {
     id: 16,
@@ -136,6 +158,7 @@ export const products = [
     descripcion:
       'El sofisticado acabado del mármol real sin obra pesada: láminas de PVC con recubrimiento UV, brillo impecable, vetas ultrarrealistas y alta resistencia al desgaste, la humedad y las manchas. Perfectas para salas, recepciones, baños y muros acentuados.',
     imagen: '/images/productos/lamina-uv-marmol.jpg',
+    fotoAmbiente: true,
   },
   {
     id: 17,
@@ -144,6 +167,7 @@ export const products = [
     descripcion:
       'Plástico transparente muy resistente al impacto, ideal para aprovechar la luz natural: invernaderos, cubiertas, techos de centros comerciales, terrazas, piscinas, patios y fachadas. Ligera y fácil de manipular.',
     imagen: '/images/productos/lamina-policarbonato-cristal.jpg',
+    fotoAmbiente: true,
   },
   {
     id: 18,
@@ -152,6 +176,7 @@ export const products = [
     descripcion:
       'Tanque circular de almacenamiento de agua en acero galvanizado con cubierta metálica. Una solución para fincas, proyectos agrícolas, industriales y de construcción.',
     imagen: '/images/productos/tanque-acero-galvanizado.jpg',
+    fotoAmbiente: true,
   },
   {
     id: 19,
@@ -159,5 +184,13 @@ export const products = [
     descripcion:
       'La solución definitiva para almacenamiento seguro, transporte de carga o proyectos de construcción modular. Ideales para bodegas, oficinas móviles y proyectos arquitectónicos.',
     imagen: '/images/productos/contenedores.jpg',
+    fotoAmbiente: true,
+    // Foto PROVISIONAL de Wikimedia Commons (licencia CC BY-SA 4.0: exige
+    // mostrar el crédito). Cuando el cliente envíe una foto propia, se
+    // reemplaza el archivo y se borra este campo "credito".
+    credito: {
+      texto: 'Foto: IPLManagement · CC BY-SA 4.0',
+      url: 'https://commons.wikimedia.org/wiki/File:20_Foot_Shipping_Container_Storage_Yard.jpg',
+    },
   },
 ];

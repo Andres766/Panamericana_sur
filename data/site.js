@@ -23,7 +23,10 @@ export const site = {
   direccion: 'Cl. 12 # 5-23, Barrio Chapal — Salida al Sur',
 
   // Horario de atención (placeholder: confirmar con el cliente)
-  horario: 'Lunes a sábado · 8:00 a.m. — 6:00 p.m.',
+  horario: [
+    'Lunes a viernes · 7:30 a.m. — 12:30 p.m. y 2:00 — 5:30 p.m.',
+    'Sábados y festivos · 8:00 a.m. — 1:00 p.m.',
+  ],
 
   // URL del iframe de Google Maps con el PIN en la dirección del local.
   // Si el pin no queda exacto, en Google Maps: buscar el local ->

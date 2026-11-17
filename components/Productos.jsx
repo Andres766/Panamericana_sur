@@ -4,6 +4,14 @@ import Reveal from '@/components/Reveal';
 import { products } from '@/data/products';
 import { linkWhatsApp } from '@/data/site';
 
+// Colores disponibles que se muestran como puntos en la tarjeta.
+// La clave es la que se usa en el campo "colores" de data/products.js.
+const COLORES = {
+  roja: { nombre: 'Roja', clase: 'bg-[#c0392b]' },
+  azul: { nombre: 'Azul', clase: 'bg-[#1f4fa8]' },
+  blanca: { nombre: 'Blanca', clase: 'bg-white' },
+};
+
 /**
  * Sección "Nuestros Productos" (catálogo oficial + líneas nuevas):
  * - En escritorio: cuadrícula de 4 columnas.
@@ -63,17 +71,31 @@ export default function Productos() {
               {/* Entrada escalonada por columna al hacer scroll */}
               <Reveal delay={(i % 4) * 120} className="h-full">
               <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-                {/* Render del producto: object-contain (sin recortar) porque
-                    los renders del catálogo vienen sobre fondo blanco */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-white p-3">
+                {/* Imagen del producto:
+                    - Render del catálogo (fondo blanco): object-contain, se ve completo.
+                    - Foto de ambiente (fotoAmbiente): object-cover, llena el recuadro. */}
+                <div className={`relative aspect-[4/3] overflow-hidden bg-white ${producto.fotoAmbiente ? '' : 'p-3'}`}>
                   <Image
                     src={producto.imagen}
                     alt={producto.nombre}
                     fill
                     loading="lazy"
                     sizes="(max-width: 768px) 288px, (max-width: 1024px) 33vw, 25vw"
-                    className="object-contain p-3 transition-transform duration-500 hover:scale-105"
+                    className={`transition-transform duration-500 hover:scale-105 ${
+                      producto.fotoAmbiente ? 'object-cover' : 'object-contain p-3'
+                    }`}
                   />
+                  {/* Crédito de la foto (licencias que exigen atribución) */}
+                  {producto.credito && (
+                    <a
+                      href={producto.credito.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-1.5 right-1.5 rounded bg-black/55 px-1.5 py-0.5 text-[10px] leading-tight text-white/90 transition-colors hover:bg-black/75"
+                    >
+                      {producto.credito.texto}
+                    </a>
+                  )}
                 </div>
 
                 {/* Texto y botón */}
@@ -87,6 +109,23 @@ export default function Productos() {
                       </svg>
                       {producto.medida}
                     </p>
+                  )}
+                  {/* Colores disponibles (solo algunos productos los tienen) */}
+                  {producto.colores?.length > 0 && (
+                    <div className="mt-2 flex items-center gap-2">
+                      <span className="text-xs font-semibold text-gristexto">Colores:</span>
+                      <ul className="flex items-center gap-1.5">
+                        {producto.colores.map((clave) => (
+                          <li key={clave}>
+                            <span
+                              title={COLORES[clave].nombre}
+                              className={`block h-4 w-4 rounded-full border border-gray-300 shadow-sm ${COLORES[clave].clase}`}
+                            />
+                            <span className="sr-only">{COLORES[clave].nombre}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-gristexto">
                     {producto.descripcion}
