@@ -48,7 +48,7 @@ mismo nombre** (no hay que tocar el código) y vuelve a ejecutar `npm run build`
 
 | Carpeta | Archivos | Estado |
 | --- | --- | --- |
-| `public/images/productos/` | 14 renders del catálogo (`teja-upvc-colonial.jpg`, …) + 6 líneas nuevas (`panel-wpc-interior.jpg`, `panel-wpc-exterior.jpg`, `lamina-uv-marmol.jpg`, `lamina-policarbonato-cristal.jpg`, `tanque-acero-galvanizado.jpg`, `contenedores.jpg`) | ✔ Reales los 14 del catálogo · ✔ 5 de las 6 nuevas son fotos de ambiente enviadas por el cliente · ⏳ `contenedores.jpg` sigue provisional (mismo nombre) |
+| `public/images/productos/` | 14 renders del catálogo (`teja-upvc-colonial.jpg`, …) + 6 líneas nuevas (`panel-wpc-interior.jpg`, `panel-wpc-exterior.jpg`, `lamina-uv-marmol.jpg`, `lamina-policarbonato-cristal.jpg`, `tanque-acero-galvanizado.jpg`, `contenedores.jpg`) | ✔ Reales los 14 del catálogo · ✔ Las 6 nuevas son fotos de ambiente enviadas por el cliente (originales en `material-cliente/productos/`) |
 | `public/images/galeria/` | `foto1.jpg` … `foto15.jpg` | ✔ Reales: 15 fotos de obras con lugar, producto y área (ver `data/gallery.js`). Para agregar más, copia `foto16.jpg`… y añade su objeto en `data/gallery.js` |
 | `public/images/empresa/` | `empresa1.jpg` … `empresa8.jpg` | ✔ Reales: punto de venta, bodega, importación y despachos (nov 2026) |
 | `public/images/logos/` | `logo-*.png` | ✔ Reales |

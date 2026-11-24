@@ -8,8 +8,7 @@
 // exterior, UV mármol, lámina policarbonato, tanque y contenedores)
 // los envió el cliente por WhatsApp (nov 2026), con fotos de
 // ambiente de referencia (no son renders sobre fondo blanco, por eso
-// llevan fotoAmbiente). La de contenedores es PROVISIONAL, tomada de
-// Wikimedia Commons: reemplazar contenedores.jpg con el mismo nombre.
+// llevan fotoAmbiente).
 //
 // Campos:
 // - nombre:      igual que en el catálogo.
@@ -22,8 +21,6 @@
 // - fotoAmbiente: (opcional) true si la imagen es una foto de ambiente
 //                que debe llenar el recuadro (en vez de un render
 //                sobre fondo blanco, que se muestra completo).
-// - credito:     (opcional) { texto, url } para fotos con licencia que
-//                exige atribución; se muestra sobre la imagen.
 // - descripcion: resumen corto de la ficha del catálogo.
 // - imagen:      render del producto (fondo blanco).
 // ============================================================
@@ -189,12 +186,5 @@ export const products = [
       'La solución definitiva para almacenamiento seguro, transporte de carga o proyectos de construcción modular. Ideales para bodegas, oficinas móviles y proyectos arquitectónicos.',
     imagen: '/images/productos/contenedores.jpg',
     fotoAmbiente: true,
-    // Foto PROVISIONAL de Wikimedia Commons (licencia CC BY-SA 4.0: exige
-    // mostrar el crédito). Cuando el cliente envíe una foto propia, se
-    // reemplaza el archivo y se borra este campo "credito".
-    credito: {
-      texto: 'Foto: IPLManagement · CC BY-SA 4.0',
-      url: 'https://commons.wikimedia.org/wiki/File:20_Foot_Shipping_Container_Storage_Yard.jpg',
-    },
   },
 ];

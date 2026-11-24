@@ -85,17 +85,6 @@ export default function Productos() {
                       producto.fotoAmbiente ? 'object-cover' : 'object-contain p-3'
                     }`}
                   />
-                  {/* Crédito de la foto (licencias que exigen atribución) */}
-                  {producto.credito && (
-                    <a
-                      href={producto.credito.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute bottom-1.5 right-1.5 rounded bg-black/55 px-1.5 py-0.5 text-[10px] leading-tight text-white/90 transition-colors hover:bg-black/75"
-                    >
-                      {producto.credito.texto}
-                    </a>
-                  )}
                 </div>
 
                 {/* Texto y botón */}
