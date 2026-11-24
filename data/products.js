@@ -13,8 +13,9 @@
 //
 // Campos:
 // - nombre:      igual que en el catálogo.
-// - medida:      largo × ancho y espesor (no todos la tienen;
-//                el catálogo no da medidas de caballetes/accesorios).
+// - medida:      largo × ancho y espesor (no todos la tienen; las de
+//                los caballetes las envió el cliente en nov 2026, el
+//                catálogo no da medidas de los accesorios).
 // - colores:     (opcional) colores disponibles; se muestran como
 //                puntos de color en la tarjeta. Valores válidos: los
 //                definidos en COLORES de components/Productos.jsx.
@@ -73,6 +74,7 @@ export const products = [
   {
     id: 6,
     nombre: 'Caballetes para Cresta Baja',
+    medida: 'Largo 1.13 m × Ancho 44 cm',
     descripcion:
       'El complemento perfecto para una cubierta segura: acabado profesional en la cumbrera y protección contra filtraciones. Varios colores disponibles.',
     imagen: '/images/productos/caballetes-cresta-baja.jpg',
@@ -80,6 +82,7 @@ export const products = [
   {
     id: 7,
     nombre: 'Caballetes para Cresta Alta',
+    medida: 'Largo 1.07 m × Ancho 60 cm',
     descripcion:
       'Protección y acabado profesional. Se adaptan perfectamente a las tejas de cresta alta, mejorando la impermeabilización de la cubierta.',
     imagen: '/images/productos/caballetes-cresta-alta.jpg',
@@ -87,6 +90,7 @@ export const products = [
   {
     id: 8,
     nombre: 'Caballetes Coloniales',
+    medida: 'Largo 1.05 m × Ancho 44 cm',
     descripcion:
       'Elegancia y protección en cada detalle. Complementan las cubiertas coloniales con un acabado armónico y resistente al clima.',
     imagen: '/images/productos/caballetes-coloniales.jpg',
